@@ -106,3 +106,50 @@ def cal_points(operations)
     
 end
 
+
+# Valid Parenthesis
+def is_valid(input)
+    
+    stack = []
+
+    input.each_char do |parenthesis|
+
+        if stack.length == 0 
+            stack.push(parenthesis)
+
+        elsif stack[-1] == "("
+            if ((parenthesis != "{" && parenthesis != "[" && parenthesis != "(") && (parenthesis != ")"))
+                return false
+            elsif (parenthesis == ")")
+                stack.pop()
+            else 
+                stack.push(parenthesis)
+            end
+            
+
+        elsif stack[-1] == "{"
+            if ((parenthesis != "(" && parenthesis != "[" && parenthesis != "{") && (parenthesis != "}"))
+                return false
+            elsif (parenthesis == "}")
+                stack.pop()
+            else 
+                stack.push(parenthesis)
+            end
+            
+
+        elsif stack[-1] == "["
+            if ((parenthesis != "[" && parenthesis != "(" && parenthesis != "{") && (parenthesis != "]"))
+                return false
+            elsif (parenthesis == "]")
+                stack.pop()
+            else 
+                stack.push(parenthesis)
+            end
+
+        end
+
+    end
+
+    return true if stack.length == 0 
+    return false
+end
