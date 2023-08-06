@@ -42,4 +42,46 @@ def merge(intervals)
  end
 
 
- 
+# Merge Strings Alternately 
+#Javascript
+
+# var mergeAlternately = function(word1, word2) {
+
+#     create a flag that switches when the counters = the length of the words
+
+#     let flag = false;
+
+#     let final = "";
+
+#     create two counters   
+#     let counter1 = 0;
+#     let counter2 = 0;
+
+#     while(flag === false) {
+#     if the counters are the same, word1[index counter1] gets added to a new string and +1 to counter1
+#         if(counter1 === counter2){
+#             final += word1[counter1]
+#             counter1 += 1
+#         } else if(counter1 === word1.length && counter2 !== word2.length){
+#             final += word2.slice(counter2);
+#             counter2 = word2.length;
+#         } else if(counter2 === word2.length && counter1 !== word1.length) {
+#             final += word1.slice(counter1);
+#             counter1 = word1.length;
+#         } else {
+#             final += word2[counter2]
+#             counter2 += 1
+#         }
+
+
+#         if(counter1 === word1.length && counter2 === word2.length) flag = true
+
+#     if the counters are different word2[index counter2] gets added to a new string and +1 to counter2        
+
+        
+#     }
+    
+# return final
+
+# };
+
