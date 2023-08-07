@@ -183,3 +183,38 @@ def is_valid(input)
     return true if stack.length == 0 
     return false
 end
+
+# Greatest Common Divisor of Strings
+def gcd_of_strings(str1, str2)
+    return str1 if str1 == str2
+    
+    substrings = []
+
+    biggest_divisor = ""
+
+    str1 > str2 ? current_string = str2 : current_string = str1
+
+    current_string.each_char.with_index do |char, index1|
+        (index1...current_string.length).each do |index2|
+            substring = current_string[index1..index2]
+            next if (((str1.length / substring.length) != (str1.length / (substring.length.to_f))) || ((str2.length / substring.length) != (str2.length / (substring.length.to_f))))
+
+            substrings.push(substring)
+        end
+    end
+
+    substrings.each do |substring|
+        length = biggest_divisor.length
+
+        next if substring.length < length
+
+        multiplier1 = str1.length / substring.length
+        multiplier2 = str2.length / substring.length
+
+        if ((substring * multiplier1 == str1) && (substring * multiplier2 == str2))
+            biggest_divisor = substring
+        end
+    end
+
+    return biggest_divisor
+end
