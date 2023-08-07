@@ -218,3 +218,45 @@ def gcd_of_strings(str1, str2)
 
     return biggest_divisor
 end
+
+# Kids with the Greatest Number of Candies
+def kids_with_candies(candies, extra_candies)
+    max = candies.max 
+
+    truthies = max - extra_candies
+
+    final = []
+
+    candies.each do |candy|
+        if candy >= truthies 
+            final.push(true)
+        else 
+            final.push(false)
+        end
+    end 
+
+    return final
+end
+
+# Can Place Flowers
+def can_place_flowers(flowerbed, n)
+    counter = 0 
+    
+    flowerbed.each_with_index do |flower, index|
+
+        if (flower == 0 && flowerbed[index - 1] == 0 && flowerbed[index + 1] == 0 && index != 0 && index != flowerbed.length - 1)
+            counter += 1
+            flowerbed[index] = 1
+        elsif (index == 0 && flowerbed[index + 1] == 0 && flower == 0)
+            counter += 1 
+            flowerbed[index] = 1
+        elsif (index == flowerbed.length - 1 && flowerbed[index - 1] == 0 && flower == 0)
+            counter += 1 
+            flowerbed[index] = 1
+        end
+    end 
+    p counter
+
+    return true if n <= counter 
+    return false
+end
