@@ -260,3 +260,48 @@ def can_place_flowers(flowerbed, n)
     return true if n <= counter 
     return false
 end
+
+# Asteroid Collision
+def asteroid_collision(asteroids)
+
+    flag = true
+    
+    while flag
+    flag = false
+
+    first = asteroids.shift
+    first ? stack = [first] : stack = []
+
+        asteroids.each_with_index do |asteroid, index|
+
+            if stack.length == 0
+                stack.push(asteroid)
+                next
+            end
+
+
+            asteroid > 0 ? current_comparer = "positive" : current_comparer = "negative"
+            stack[-1] > 0 ? current_top = "positive" : current_top = "negative"
+
+    
+            if (current_comparer == current_top) 
+                stack.push(asteroid)
+            elsif (current_top == "negative" && current_comparer == "positive")
+                stack.push(asteroid)
+            else 
+                if (stack[-1].abs < asteroid.abs) 
+                    stack[-1] = asteroid
+                    flag = true
+                elsif (stack[-1].abs == asteroid.abs)
+                    stack.pop
+                end
+            end
+
+        end    
+
+    asteroids = stack
+    end
+    return stack
+
+    
+end
