@@ -1,4 +1,4 @@
-# Merge Intervals
+# Merge Intervals Recursive
 
 def merge(intervals)
     #base case is if stack.length == 1 
@@ -40,6 +40,36 @@ def merge(intervals)
      return stack 
      
  end
+
+ # Merge Intervals Normal
+
+ def merge(intervals)
+
+    new_interval = intervals.sort
+
+    stack = [new_interval.shift]
+
+    new_interval.each do |interval|
+
+        current_stack = {
+            "start": stack[-1][0],
+            "end": stack[-1][-1]
+        }
+
+        current_interval = {
+            "start": interval[0],
+            "end": interval[-1]
+        }
+
+        if (current_stack[:end] >= current_interval[:start]) && (current_stack[:end] <= current_interval[:end])
+            stack[-1] = [current_stack[:start], current_interval[:end]]
+        elsif (current_stack[:end] < current_interval[:start])
+            stack.push(interval) 
+        end
+    end
+    
+    return stack
+end
 
 
 # Merge Strings Alternately 
