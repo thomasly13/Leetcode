@@ -368,3 +368,107 @@ def reverse_words(s)
     return final_string.join(" ")
     
 end
+
+# Find the difference of Two Arrays
+def find_difference(nums1, nums2)
+
+    final = [] 
+
+    nums1.each do |num|
+        
+        if (!nums2.include?(num)) 
+            if final[0]
+                final[0].push(num) if !final[0].include?(num)
+            else 
+                final.push([num])
+            end
+        end
+    end
+
+    final.push([]) if !final[0]
+
+    nums2.each do |num|
+        
+        if (!nums1.include?(num)) 
+            if final[1]
+                final[1].push(num) if !final[1].include?(num)
+            else 
+                final.push([num])
+            end
+        end
+    end
+
+    final.push([]) if !final[1]
+
+
+    return final 
+end
+
+# Decode String
+def decode_string(s)    
+
+    flag = true
+
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz[]"
+
+    while flag
+        flag = false
+
+        stack = ""
+    
+        multiplier = ""
+
+        bracket_counter = 0
+        
+        string = ""
+
+        
+        s.each_char.with_index do |char, index|
+            if (char == "[")
+                if (bracket_counter != 1)
+                    string += char
+                    flag = true
+                end
+            elsif (char =="]")
+                if(bracket_counter != 1)
+                    bracket_counter -= 1
+                    string += char
+                else 
+                    p "hitting"
+                    stack += string * multiplier.to_i
+                    bracket_counter = 0
+                    string = ""
+                    multiplier = ""
+                end
+            elsif alphabet.include?(char)
+                if bracket_counter == 0 
+                    stack += char
+                else 
+                    string += char                
+                end
+
+            else
+                if bracket_counter > 0
+                    if alphabet.include?(s[index + 1])
+                        bracket_counter += 1
+                    end
+                    string += char
+                else
+                    if alphabet.include?(s[index + 1])
+                        multiplier += char
+                        bracket_counter += 1    
+                    else 
+                        multiplier += char
+                    end
+
+                end
+
+            end
+        end
+
+        s = stack
+    end
+
+    return stack
+    
+end
