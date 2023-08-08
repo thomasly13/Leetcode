@@ -305,3 +305,27 @@ def asteroid_collision(asteroids)
 
     
 end
+
+#Reverse Vowels of a String
+def reverse_vowels(s)
+
+    vowels = "aeiouAEIOU"
+
+    current_vowels = [] 
+
+    s.each_char.with_index do |char, index|
+         
+        if vowels.include?(char)
+            current_vowels.push(char)
+            s[index] = "*"
+        end
+    end
+
+    s.each_char.with_index do |char, index|
+        if char == "*"
+            s[index] = current_vowels.pop
+        end
+    end
+
+    return s
+end
