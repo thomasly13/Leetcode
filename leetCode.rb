@@ -329,3 +329,42 @@ def reverse_vowels(s)
 
     return s
 end
+
+# Reverse Words in a String
+def reverse_words(s)
+    start_char = s.length - 1
+    end_char = s.length - 1
+    word = ""
+
+    space = " "
+
+    final_string = []
+
+    until (start_char < 1)
+
+
+        if(s[start_char] == space)
+            word = s[start_char + 1..end_char]
+            final_string.push(word) if word != space && word != ""
+            word = ""
+            start_char -= 1
+            end_char = start_char
+        else 
+            start_char -= 1
+        end
+    end
+
+
+    if s[start_char] == " "
+        word = s[start_char + 1..end_char]   
+    else 
+        word = s[start_char..end_char]
+    end
+
+
+
+    final_string.push(word) if word != space && word != ""
+
+    return final_string.join(" ")
+    
+end
