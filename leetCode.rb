@@ -472,3 +472,21 @@ def decode_string(s)
     return stack
     
 end
+
+# Two Sum
+
+def two_sum(nums, target)
+
+    tracker = {} 
+
+    nums.each_with_index do |num, index|
+        if tracker[num]
+            return [tracker[num], index]
+        else 
+            tracker[target - num] = index
+        end
+    end
+
+
+
+end
