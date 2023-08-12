@@ -487,6 +487,24 @@ def two_sum(nums, target)
         end
     end
 
+end
 
+# Unique Number of Occurrences 
+def unique_occurrences(arr)
+    counter = Hash.new(0)
 
+    checker = {}
+
+    arr.each do |num|
+        counter[num] += 1
+    end
+
+    counter.each do |key, value|
+        if checker[value]
+            return false
+        else 
+            checker[value] = key 
+        end 
+    end
+    return true
 end
