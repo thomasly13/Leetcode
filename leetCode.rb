@@ -547,3 +547,36 @@ def close_strings(word1, word2)
     return true
 
 end
+
+# Equal Row and Column Pairs
+def equal_pairs(grid)
+    size = grid.length 
+    
+    counter = 0 
+
+    row_tracker = {}
+
+    col_tracker = {}
+
+    grid.each_with_index do |subarray, index|
+        row_tracker[index] = subarray
+    end
+
+    size.times do |index1|
+        subarray = []
+        size.times do |index2|
+            subarray.push(grid[index2][index1])
+        end
+        col_tracker[index1] = subarray
+    end
+
+    size.times do |index1|
+        size.times do |index2|
+            if col_tracker[index2] == row_tracker[index1]
+                counter += 1
+            end
+        end
+    end
+
+    return counter
+end
