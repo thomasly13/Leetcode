@@ -508,3 +508,42 @@ def unique_occurrences(arr)
     end
     return true
 end
+
+# Determine if Two Strings Are Close 
+def close_strings(word1, word2)
+
+    return false if word1.length != word2.length 
+
+    word1_count = Hash.new(0)
+
+    word2_count = Hash.new(0)
+
+    common_count = {}
+
+    word1.each_char do |char|
+        word1_count[char] += 1
+    end
+
+    word2.each_char do |char|
+        word2_count[char] += 1
+    end
+
+    return true if word1_count == word2_count
+
+    return false if word1_count.keys.sort != word2_count.keys.sort
+
+    word1_count.each do |key, value|
+        word2_count.each do |key2, value2|
+            if value == value2 
+                word1_count.delete(key)
+                word2_count.delete(key2)
+                break
+            end
+        end
+    end
+
+    return false if (word1_count != word2_count)
+
+    return true
+
+end
