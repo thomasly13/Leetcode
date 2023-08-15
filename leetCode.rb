@@ -612,3 +612,34 @@ def max_profit(prices)
     return biggest_profit
 
 end
+
+# Merge Two Sorted Lists
+def merge_two_lists(list1, list2)
+    
+    merged_list = []
+
+
+    until list1 == nil && list2 == nil
+
+        current_node1 = list1
+
+        current_node2 = list2
+
+        if list1 == nil && list2 != nil
+            merged_list.push(list2.val)
+            list2 = list2.next
+        elsif list1 != nil && list2 == nil
+            merged_list.push(list1.val)
+            list1 = list1.next
+        elsif (current_node1.val < current_node2.val)
+            merged_list.push(list1.val)
+            list1 = list1.next
+        else 
+            merged_list.push(list2.val)
+            list2 = list2.next
+        end
+    end
+
+
+    merged_list
+end
