@@ -580,3 +580,35 @@ def equal_pairs(grid)
 
     return counter
 end
+
+#Best Time to Buy and Sell Stock
+def max_profit(prices)
+
+    biggest_profit = 0
+
+    min = prices.min 
+
+    max = prices.max 
+
+
+    if (prices.find_index(min) < prices.find_index(max))
+        return max - min 
+    end
+
+    pivot = prices[0]
+
+    prices[1..-1].each_with_index do |num, i|
+        if (num < pivot)
+            pivot = num
+            next 
+        else 
+            sale = num - pivot
+            if sale > biggest_profit 
+                biggest_profit = sale
+            end
+        end
+    end
+
+    return biggest_profit
+
+end
