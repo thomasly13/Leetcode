@@ -670,3 +670,35 @@ def is_palindrome(s)
 
     false
 end
+
+# Time to sell stock 2
+def max_profit(prices)
+
+    total_profit = 0
+
+    current_profit = 0
+    
+    pivot = prices[0]
+
+    prices[1..-1].each_with_index do |sale, index|
+        if (sale < pivot)
+            pivot = sale
+            total_profit += current_profit   
+            current_profit = 0
+        else 
+            if current_profit < sale - pivot 
+                current_profit = sale - pivot   
+                if (index == prices.length - 2)
+                    total_profit += current_profit
+                end
+            else 
+                pivot = sale 
+                total_profit += current_profit   
+                current_profit = 0      
+            end
+
+        end
+    end
+
+    return total_profit
+end
