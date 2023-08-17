@@ -643,3 +643,30 @@ def merge_two_lists(list1, list2)
 
     merged_list
 end
+
+#Valid Palindrome
+def is_palindrome(s)
+    
+    capital_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    lower_alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+    numbers = "0123456789"
+
+    forward_string = ""
+    backwards_string = ""
+    
+    s.each_char do |char|
+        if capital_alphabet.include?(char)
+            forward_string += char.downcase
+            backwards_string = char.downcase + backwards_string
+        elsif lower_alphabet.include?(char) || numbers.include?(char)
+            forward_string += char
+            backwards_string = char + backwards_string
+        end
+    end
+
+    return true if forward_string == backwards_string
+
+    false
+end
