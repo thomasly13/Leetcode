@@ -745,3 +745,31 @@ def is_anagram(s, t)
 
     return string1_counter == string2_counter
 end
+
+# Binary Search 
+def search(nums, target)
+
+    return -1 if target < nums[0] || target > nums[-1]
+
+    mid_index = nums.length / 2
+
+    return -1 if nums[mid_index] != target && nums.length <= 1 
+
+    return mid_index if nums[mid_index] == target
+
+    smaller_array = nums[0...mid_index]
+
+    larger_array = nums[mid_index + 1..-1]
+
+    if (target < nums[mid_index])
+        return search(smaller_array, target)
+    else
+        results = search(larger_array, target)
+        if results == -1 
+            return -1
+        else 
+            return results + mid_index + 1
+        end
+    end
+    
+end
