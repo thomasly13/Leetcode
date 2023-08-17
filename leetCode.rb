@@ -703,7 +703,7 @@ def max_profit(prices)
     return total_profit
 end
 
-# Added invert Binary Tree
+# Invert Binary Tree
 def invert_tree(root)
 
     return root if root == nil
@@ -724,4 +724,24 @@ def invert_tree(root)
 
     return new_node
 
+end
+
+# Valid Anagram
+def is_anagram(s, t)
+
+    return false if s.length != t.length 
+
+    string1_counter = Hash.new(0)
+
+    string2_counter = Hash.new(0)
+
+    s.each_char do |char|
+        string1_counter[char] += 1
+    end
+
+    t.each_char do |char|
+        string2_counter[char] += 1
+    end
+
+    return string1_counter == string2_counter
 end
