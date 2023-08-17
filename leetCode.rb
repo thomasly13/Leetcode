@@ -702,3 +702,26 @@ def max_profit(prices)
 
     return total_profit
 end
+
+# Added invert Binary Tree
+def invert_tree(root)
+
+    return root if root == nil
+
+    new_node = TreeNode.new(root.val)
+
+    if root.left == nil && root.right == nil
+        return root
+    end
+
+    if root.left
+        new_node.right = invert_tree(root.left)
+    end
+
+    if root.right
+        new_node.left = invert_tree(root.right)
+    end
+
+    return new_node
+
+end
