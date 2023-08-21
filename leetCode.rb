@@ -803,3 +803,40 @@ end
     #}
     #return results;
 #};
+
+#Flood Fill
+def flood_fill(image, sr, sc, color)
+
+    starting_color = image[sr][sc]
+    return image if starting_color == color
+    image[sr][sc] = color
+
+    
+    queue = [[sr, sc]]
+
+    while queue.length > 0 
+        current_square = queue.shift
+
+        current_x = current_square[1]
+        current_y = current_square[0]
+
+        adjacent = []
+
+        adjacent.push([current_y - 1, current_x]) if current_y != 0
+        adjacent.push([current_y, current_x - 1]) if current_x != 0
+        adjacent.push([current_y + 1, current_x]) if current_y != image.length - 1
+        adjacent.push([current_y, current_x + 1]) if current_x != image[0].length - 1
+
+        adjacent.each do |coordinates|
+            x = coordinates[1]
+            y = coordinates[0]
+
+            if image[y][x] == starting_color
+                image[y][x] = color
+                queue.push(coordinates)
+            end
+        end
+    end
+
+    return image
+end
