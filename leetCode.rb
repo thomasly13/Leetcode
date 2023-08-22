@@ -859,3 +859,15 @@ def reverse_list(head)
         current_node = prev_node
     end
 end
+
+# leaf similar tree
+def leaf_similar(root1, root2)
+    dfs(root1) == dfs(root2)
+end
+
+def dfs(root)
+    return [root.val] if !root.left && !root.right
+    root.left ? left = dfs(root.left) : left = []
+    root.right ? right = dfs(root.right) : right = []
+    return left.concat(right)
+end
