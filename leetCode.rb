@@ -840,3 +840,22 @@ def flood_fill(image, sr, sc, color)
 
     return image
 end
+
+# reversed linked list 
+def reverse_list(head)
+    return head if head == nil || head.next == nil
+
+    current_node = head
+    next_node = nil
+
+    while true
+        if current_node.next == nil
+            current_node.next = next_node
+            return current_node
+        end
+        prev_node = current_node.next
+        current_node.next = next_node
+        next_node = current_node
+        current_node = prev_node
+    end
+end
