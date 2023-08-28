@@ -889,3 +889,40 @@ def is_subsequence(s, t)
 
 
 end
+
+# conatainer with most water
+def max_area(height)
+    
+    # o(n)
+
+    # have two pointers starting at the middle going out to 0 and numOfTowers, finding the max area 
+
+    num_of_towers = height.length # 9 
+
+    pointer_b = num_of_towers - 1 # 4
+    pointer_a = 0  # 3 
+
+    greatest_area = 0  # 12
+
+
+    while (pointer_a != pointer_b)
+
+        width = pointer_b - pointer_a 
+
+        tower_a = height[pointer_a]
+        tower_b = height[pointer_b]
+
+        (tower_a > tower_b) ? length = tower_b : length = tower_a
+       
+        area = width * length 
+        greatest_area = area if area > greatest_area 
+
+        if tower_a > tower_b 
+            pointer_b -= 1
+        else tower_a < tower_b 
+            pointer_a += 1         
+        end
+    end
+
+    return greatest_area 
+end
