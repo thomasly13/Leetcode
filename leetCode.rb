@@ -871,3 +871,21 @@ def dfs(root)
     root.right ? right = dfs(root.right) : right = []
     return left.concat(right)
 end
+
+# Is Subsequence
+
+def is_subsequence(s, t)
+
+    pointer = 0
+
+    t.each_char do |char|
+        if s[pointer] == char
+            pointer += 1
+        end
+        return true if pointer == s.length
+    end
+
+    return pointer == s.length
+
+
+end
