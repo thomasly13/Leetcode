@@ -926,3 +926,32 @@ def max_area(height)
 
     return greatest_area 
 end
+
+# Max Number of K-Sum Pairs
+
+def max_operations(nums, k)
+    sorted_array = nums.sort
+
+    pointer1 = 0
+
+    pointer2 = sorted_array.length - 1
+
+    operationCounter= 0 
+
+    while (pointer1 < pointer2) 
+        first_number = sorted_array[pointer1]
+        second_number = sorted_array[pointer2]
+
+        if (first_number + second_number == k)
+            pointer1 += 1
+            pointer2 -= 1
+            operationCounter += 1
+        elsif( first_number + second_number < k)
+            pointer1 += 1
+        else 
+            pointer2 -= 1
+        end
+    end
+
+    return operationCounter
+end
