@@ -955,3 +955,30 @@ def max_operations(nums, k)
 
     return operationCounter
 end
+
+# Counting Bits
+def count_bits(n)
+    #create an array to push values into
+    ans = [0, 1]
+
+    #set base cases
+    return [0] if n == 0
+    return ans if n == 1
+
+    #set a pointer
+    i = 2
+
+    temp = [1]
+
+    #while loop for while pointer is not greater than n
+    while i <= n
+        # calculate number of 1's in binary representation
+        ans.concat(temp.concat(temp.map { |num| num + 1 }))
+        i *= 2
+    end
+
+    ans.pop(i - n - 1)
+    
+    # return ans array
+    return ans
+end
