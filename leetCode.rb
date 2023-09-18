@@ -983,4 +983,42 @@ def count_bits(n)
     return ans
 end
 
-# 
+# Maximum Twin Sum of a Linked List
+def pair_sum(head)
+    list_length = linked_list_length(head) - 1
+
+    max_sum = 0
+
+    index = 0
+
+    tracker = {}
+
+    current_node = head
+
+    while current_node
+        if tracker[list_length - index]
+            current_sum = tracker[list_length - index] + current_node.val
+            max_sum = current_sum if current_sum > max_sum
+        else
+            tracker[index] = current_node.val
+        end
+        index += 1
+        current_node = current_node.next
+    end
+    
+    return max_sum
+end                                                   
+
+def linked_list_length(head)
+    
+    current_node = head
+    
+    counter = 0 
+    
+    while current_node
+        counter += 1
+        current_node = current_node.next
+    end
+    
+    counter
+end
