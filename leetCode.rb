@@ -1022,3 +1022,46 @@ def linked_list_length(head)
     
     counter
 end
+
+# Odd Even Linked List
+def odd_even_list(head)
+    # create two set of variables, odd and even
+
+    # keep track of index 
+
+    # for whatever it is, make the current node the next and change the current node 
+
+    return head if (head == nil || head.next == nil)
+
+    index = 1
+
+    current_node = head.next.next
+
+    odd_node = head
+
+    current_odd_node = head
+
+    even_node = head.next
+
+    current_even_node = head.next
+
+    while current_node 
+        if (index % 2 == 1)
+            current_odd_node.next = current_node 
+            current_odd_node = current_node 
+        else 
+            current_even_node.next = current_node
+            current_even_node = current_node
+        end
+
+        index += 1
+        current_node = current_node.next
+
+    end
+
+    current_even_node.next = nil
+    current_odd_node.next = even_node 
+    return odd_node
+
+    
+end
