@@ -1065,3 +1065,41 @@ def odd_even_list(head)
 
     
 end
+
+# Delete the Middle Node of a Linked List
+
+def delete_middle(head)
+
+    return nil if head.next == nil
+
+    if head.next.next == nil
+        head.next = nil
+        return head
+    end
+
+    fast_pointer = 1 
+
+    connector_node_1 = head
+
+    connector_node_2 = head.next.next
+
+    fast_node = head.next.next.next
+
+    while fast_node 
+        fast_node = fast_node.next 
+        fast_pointer += 1
+
+        if (fast_pointer % 2 == 0)
+            connector_node_1 = connector_node_1.next
+            connector_node_2 = connector_node_2.next
+        end
+
+    end
+
+    connector_node_1.next = connector_node_2
+
+    return head
+    
+
+    
+end
