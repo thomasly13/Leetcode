@@ -1103,3 +1103,17 @@ def delete_middle(head)
 
     
 end
+
+# Find the Highest Altitude
+def largest_altitude(gain)
+    current_altitude = 0 
+
+    highest_altitude = 0
+
+    gain.each do |change|
+        current_altitude += change
+        highest_altitude = current_altitude if highest_altitude < current_altitude
+    end
+
+    return highest_altitude
+end
