@@ -1117,3 +1117,67 @@ def largest_altitude(gain)
 
     return highest_altitude
 end
+
+# Maximum Number of Vowels in a Substring of Given Length
+def max_vowels(s, k)
+    
+    vowels = "aeiou"
+
+    pointer1 = 0 
+
+    pointer2 = 0
+
+    current_vowel_count = 0
+
+    biggest_vowel_count = 0
+
+    until (pointer2 - pointer1 == k)
+        if (vowels.include?(s[pointer2]))
+            current_vowel_count += 1
+        end
+        pointer2 += 1
+    end
+
+    pointer2 -= 1
+
+    until (pointer2 == s.length)
+
+        return current_vowel_count if current_vowel_count == k
+
+        biggest_vowel_count = current_vowel_count if current_vowel_count > biggest_vowel_count
+
+        current_vowel_count -= 1 if vowels.include?(s[pointer1])
+
+        pointer1 += 1
+
+        pointer2 += 1
+
+        current_vowel_count += 1 if pointer2 != s.length && vowels.include?(s[pointer2]) 
+
+        biggest_vowel_count = current_vowel_count if current_vowel_count > biggest_vowel_count
+    end
+    
+    return biggest_vowel_count
+end
+
+#Linked list cycle
+def hasCycle(head)
+    # hash with node as keys 
+
+    tracker = {} #1, 2
+
+    current_node = head # 1
+
+    while current_node 
+        
+        if tracker[current_node]
+            return true 
+        end
+        
+        tracker[current_node] = 1 
+        current_node = current_node.next
+
+    end 
+
+    return false
+end
