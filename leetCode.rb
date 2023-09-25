@@ -1193,3 +1193,13 @@ def inorder_traversal(root)
 
     return left.concat([root.val], right)
 end
+
+# Binary Tree Preorder Traversal
+def preorder_traversal(root)
+    return [] if root == nil
+
+    left = preorder_traversal(root.left)
+    right = preorder_traversal(root.right)
+
+    return [root.val].concat(left, right)
+end
