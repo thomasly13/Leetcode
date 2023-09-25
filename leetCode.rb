@@ -1181,3 +1181,15 @@ def hasCycle(head)
 
     return false
 end
+
+# Binary Tree Inorder Traversal
+def inorder_traversal(root)
+
+    return [] if root == nil
+    
+    left = inorder_traversal(root.left)
+    right = inorder_traversal(root.right)
+
+
+    return left.concat([root.val], right)
+end
