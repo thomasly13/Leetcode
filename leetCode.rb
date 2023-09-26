@@ -1213,3 +1213,42 @@ def postorder_traversal(root)
 
     return left.concat(right, [root.val])
 end
+
+# Pivot Index
+def pivot_index(nums)
+    # Create two sliding windows
+
+    # create a pivot
+
+    # depending on which one is bigger change then the pivot 
+
+    # save pivots to a hash, if it exist return -1 
+
+    # if pivot goes negative ot to length return -1
+
+    size = nums.length
+    
+    pivot = 0 
+
+    sliding_window_1 = 0
+
+    sliding_window_2 = nums[1..-1].sum
+
+    while pivot < size - 1
+
+        return pivot if sliding_window_1 == sliding_window_2
+        
+        sliding_window_1 += nums[pivot]
+
+        pivot += 1
+
+        sliding_window_2 -= nums[pivot]
+
+    end
+
+    if sliding_window_1 == sliding_window_2 
+        return pivot
+    else
+        return -1
+    end
+end
