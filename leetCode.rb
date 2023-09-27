@@ -1252,3 +1252,56 @@ def pivot_index(nums)
         return -1
     end
 end
+
+# Search Matrix
+def search_matrix(matrix, target) # [1... , 10..., 23...], 3
+    # look at the first integer of every row until we find the row 
+
+    # looking at the row, do a binary search to find the number or return false 
+
+    flattened = matrix.flatten
+
+    return binary_search(flattened, target)
+
+end
+
+def binary_search(array, target)
+
+    # base case of checking if the array is length 1 or lower, and checking the value 
+
+    # find middle index 
+
+    # return true if middle value = target 
+
+    # lower_array = numbers smaller than middle value 
+
+    # higher_array = numbers bigger than middle value 
+
+    # call this recursively depending on if the target is bigger or smaller than the middle value 
+
+     # [1, 3], 3
+
+    return false if array.length <= 1 && array[0] != target 
+
+    middle_index = array.length / 2 # 1
+
+    middle_value = array[middle_index] #3
+
+    return true if middle_value == target 
+
+    lower_array = array[0...middle_index] 
+
+    higher_array = array[middle_index + 1..-1]
+
+    if (target > middle_value) 
+        if (binary_search(higher_array, target))
+            return true
+        end
+    else 
+        if (binary_search(lower_array, target))
+            return true
+        end
+    end
+
+    return false
+end
