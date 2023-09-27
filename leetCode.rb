@@ -1305,3 +1305,21 @@ def binary_search(array, target)
 
     return false
 end
+
+#Median of two sorted arrays
+def find_median_sorted_arrays(nums1, nums2)
+    merged = []
+
+    while nums1.length > 0 && nums2.length > 0
+        if nums1[0] > nums2[0]
+            merged.push(nums2.shift)
+        else 
+            merged.push(nums1.shift)
+        end
+    end
+
+    merged.concat(nums1, nums2)
+    size = merged.length
+
+    size % 2 == 1 ? merged[size / 2] : (merged[size / 2] + merged[size / 2 - 1]) / 2.0
+end
