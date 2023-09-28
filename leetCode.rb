@@ -1323,3 +1323,50 @@ def find_median_sorted_arrays(nums1, nums2)
 
     size % 2 == 1 ? merged[size / 2] : (merged[size / 2] + merged[size / 2 - 1]) / 2.0
 end
+
+# Add Two Numbers from Linked List
+def add_two_numbers(l1, l2)
+    #iterate through both list and add the corresponding indexes
+
+    array1 = []
+
+    array2 = []
+
+    current_node_1 = l1 
+
+    current_node_2 = l2
+    
+    while current_node_1 
+        array1.push(current_node_1.val)
+        current_node_1 = current_node_1.next
+    end
+    
+     while current_node_2 
+        array2.push(current_node_2.val)
+        current_node_2 = current_node_2.next
+    end
+
+    num1 = array1.reverse.join("").to_i
+    num2 = array2.reverse.join("").to_i
+
+    sum = num1 + num2
+
+    sum_array = sum.to_s.split("").reverse
+
+    sum_array = sum_array.map{|num| num.to_i}
+
+    final = nil
+    current_node = nil
+    sum_array.each do |nums|
+        if !final 
+            final = ListNode.new(nums)
+            current_node = final
+        else
+            current_node.next = ListNode.new(nums)
+            current_node = current_node.next
+        end
+    end
+
+    return final
+    
+end
