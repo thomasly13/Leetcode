@@ -1390,3 +1390,9 @@ def sort_array_by_parity(nums)
 
     return even_array.concat(odd_array)
 end 
+
+# Monotonic Array
+def is_monotonic(nums)
+    return true if nums.sort == nums || nums.sort == nums.reverse
+    false
+end
