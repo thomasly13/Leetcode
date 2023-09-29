@@ -1396,3 +1396,25 @@ def is_monotonic(nums)
     return true if nums.sort == nums || nums.sort == nums.reverse
     false
 end
+
+def is_monotonic(nums)
+    return true if nums.length < 3
+    increasing = nil
+    nums[1..-1].each_with_index do |num, index|
+        if num > nums[index]
+            increasing = true
+            break
+        elsif num < nums[index]
+            increasing = false
+            break
+        else
+            next
+        end
+    end
+    nums[2..-1].each_with_index do |num, index|
+        if (increasing == true && num < nums[index + 1]) ||(increasing == false && num > nums[index + 1]) 
+            return false 
+        end
+    end
+    true
+end
