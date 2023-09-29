@@ -1370,3 +1370,23 @@ def add_two_numbers(l1, l2)
     return final
     
 end
+
+# Sort Array by parity
+def sort_array_by_parity(nums)
+
+    pointer = 0 
+
+    odd_array = [] 
+
+    even_array = []
+
+    nums.each do |num|
+        if num % 2 == 1
+            odd_array.push(num)
+        else 
+            even_array.push(num)
+        end
+    end
+
+    return even_array.concat(odd_array)
+end 
