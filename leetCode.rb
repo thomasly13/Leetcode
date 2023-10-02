@@ -1418,3 +1418,62 @@ def is_monotonic(nums)
     end
     true
 end
+
+# Remove colored pieces if both neighbors are the same color
+def winner_of_game(colors)
+
+    return false if colors.length < 3
+
+    player = "A"
+
+    player_a_index = 0
+
+    player_b_index = 0
+    #AAABABB
+    while true
+        if player == "A"
+            
+
+            colors[player_a_index..-1].each_char.with_index do |char, index|
+                next if player_a_index + index == 0
+                if player_a_index + index == colors.length - 1
+                    return false
+                end
+                if char == player 
+                    if colors[player_a_index + index - 1] == char && colors[player_a_index + index + 1] == char
+                        colors[player_a_index + index] = ""
+
+                        player = "B"
+
+                        player_a_index += index - 1
+                        
+                        break
+                    end
+                end
+            end
+
+        else
+            colors[player_b_index..-1].each_char.with_index do |char, index|
+                next if player_b_index + index == 0
+                if player_b_index + index == colors.length - 1
+                    return true
+                end
+                if char == player 
+                    if colors[player_b_index + index - 1] == char && colors[player_b_index + index + 1] == char
+                        colors[player_b_index + index] = ""
+
+                        player = "A"
+
+                        player_b_index += index - 1
+                        
+                        break
+                    end
+                end
+            end
+            
+        end
+
+         
+    end
+    
+end
