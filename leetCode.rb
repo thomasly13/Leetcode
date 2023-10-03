@@ -1477,3 +1477,29 @@ def winner_of_game(colors)
     end
     
 end
+
+# Number of good pairs
+
+def num_identical_pairs(nums)
+
+    counter = Hash.new(0)
+
+    total = 0
+
+    nums.each do |num|
+        counter[num] += 1
+    end
+
+    counter.each_value do |amount|
+        if amount > 1
+            total += calculation(amount)
+        end
+    end
+    return total
+end
+
+def calculation(amount)
+    return 1 if amount == 2
+
+    return calculation(amount - 1) + (amount - 1)
+end
