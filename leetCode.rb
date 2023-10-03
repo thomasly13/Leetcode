@@ -1503,3 +1503,58 @@ def calculation(amount)
 
     return calculation(amount - 1) + (amount - 1)
 end
+
+# MErge two sorted list
+def merge_two_lists(list1, list2)
+    # holding two current nodes 
+
+    # looping through both lists, comparing the current nodes and adding the lesser node 
+
+    # loop ends when one of the current nodes hits nil and Ill add the rest of the other list to the end 
+
+    if !list1
+        return list2
+    elsif !list2
+        return list1
+    end
+
+    current_node_a = list1 # heads of the list => 2 [ 2, 4]
+
+    current_node_b = list2 #heads of the list => 1 [1, 3, 4]
+
+    current_final_node = nil
+
+    if current_node_a.val > current_node_b.val
+        final_head = current_node_b 
+        current_node_b = current_node_b.next 
+        current_final_node = final_head
+    else
+        final_head = current_node_a # [1]
+        current_node_a = current_node_a.next
+        current_final_node = final_head
+    end
+    # [1, 1, 2, 3, 4]
+    # heads of the list => nil []
+     #heads of the list => 4 [4]
+    while (current_node_a && current_node_b)
+
+        if current_node_a.val > current_node_b.val
+            current_final_node.next = current_node_b
+            current_final_node = current_final_node.next
+            current_node_b = current_node_b.next 
+
+        else
+            current_final_node.next = current_node_a
+            current_final_node = current_final_node.next
+            current_node_a = current_node_a.next
+        end
+
+    end
+
+    current_final_node.next =  current_node_a || current_node_b
+
+    return final_head
+
+    
+end
+
