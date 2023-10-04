@@ -1558,3 +1558,43 @@ def merge_two_lists(list1, list2)
     
 end
 
+# longest substring without repeating characters
+def length_of_longest_substring(s)
+    return 0 if s.length < 1
+    
+    pointer1 = 0
+    pointer2 = 0
+    
+    array = s.split('')
+
+    highest_count = 1
+
+    current_sub = array[pointer1..pointer2]
+
+    
+    until pointer2 == s.length - 1
+        pointer2 += 1
+        current_comparer = array[pointer2]
+
+        
+
+        if current_sub.include?(current_comparer)
+            highest_count = current_sub.length if highest_count < current_sub.length 
+            flag = true
+            while flag
+                if array[pointer1] == current_comparer
+                    flag = false
+                    pointer1 += 1
+                    current_sub = array[pointer1..pointer2]
+                else
+                    pointer1 += 1 
+                end
+            end
+        else
+            current_sub = array[pointer1..pointer2]
+            highest_count = current_sub.length if highest_count < current_sub.length 
+        end
+    end
+
+    return highest_count
+end
