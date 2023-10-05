@@ -1598,3 +1598,25 @@ def length_of_longest_substring(s)
 
     return highest_count
 end
+
+# Majority element 2
+def majority_element(nums)
+    comparer = nums.length/3.0
+
+    counter = Hash.new(0)
+
+    tracker = Set.new()
+
+    final_array = []
+
+    nums.each do |num|
+        counter[num] += 1
+        if !tracker.include?(num) && counter[num] > comparer 
+            final_array.push(num) 
+            tracker.add(num)
+        end
+    end
+
+
+    final_array
+end
