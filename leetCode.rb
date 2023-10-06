@@ -1620,3 +1620,21 @@ def majority_element(nums)
 
     final_array
 end
+
+#Longest Common prefix
+def longest_common_prefix(strs)
+
+    first_word = strs[0]
+
+    prefix = ""
+
+    first_word.length.times do |index|
+        pre = first_word[0..index]
+        if strs.all? {|word| word[0..index] == pre}
+            prefix = pre
+        else
+            return prefix
+        end
+    end
+    return prefix
+end
