@@ -1638,3 +1638,23 @@ def longest_common_prefix(strs)
     end
     return prefix
 end
+
+# Power of Four
+def is_power_of_four(n)
+    
+    return true if n == 1
+    
+    return false if n < 4
+    current_num = n
+
+    while true 
+        divided = current_num / 4.0 
+
+        return false if divided != divided.floor
+
+        return true if divided == 1
+
+        current_num = divided
+         
+    end
+end
