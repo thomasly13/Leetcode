@@ -1671,3 +1671,8 @@ def search_insert(nums, target)
 
     return nums.length
 end
+
+# Length of last word
+def length_of_last_word(s)
+    return s.split(" ")[-1].length
+end
