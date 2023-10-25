@@ -1658,3 +1658,16 @@ def is_power_of_four(n)
          
     end
 end
+
+# Search Insert Position
+def search_insert(nums, target)
+   
+
+    nums.each_with_index do |num, index| 
+        if num == target || num > target 
+            return index
+        end
+    end
+
+    return nums.length
+end
