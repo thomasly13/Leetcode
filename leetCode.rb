@@ -1700,3 +1700,25 @@ def my_sqrt(x)
          current += 1
      end
  end
+
+
+# Remove Duplicates from Sorted List
+def delete_duplicates(head)
+    return head if !head || !head.next
+    
+    previous_node = head
+
+    next_node = head.next
+
+    while next_node 
+        if previous_node.val == next_node.val
+            previous_node.next = next_node.next
+            next_node = previous_node.next
+        else 
+            previous_node = next_node
+            next_node = next_node.next
+        end
+    end
+
+    return head
+end
