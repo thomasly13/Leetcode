@@ -1676,3 +1676,12 @@ end
 def length_of_last_word(s)
     return s.split(" ")[-1].length
 end
+
+# Added plus one
+def plus_one(digits)
+    stringify = digits.map {|num| num.to_s }
+
+    new_num = stringify.join("").to_i
+
+    return (new_num + 1).to_s.split("").map{|char| char.to_i}
+end
