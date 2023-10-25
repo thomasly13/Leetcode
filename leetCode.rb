@@ -1685,3 +1685,18 @@ def plus_one(digits)
 
     return (new_num + 1).to_s.split("").map{|char| char.to_i}
 end
+
+# Square Root
+def my_sqrt(x)
+    current = 0
+ 
+     while true 
+         squared = current ** 2
+         if squared == x 
+             return current 
+         elsif squared > x
+             return current - 1
+         end
+         current += 1
+     end
+ end
