@@ -1722,3 +1722,36 @@ def delete_duplicates(head)
 
     return head
 end
+
+# Remove Linked List Elements
+def remove_elements(head, val)
+
+    return head if !head 
+    
+    current_head = head 
+
+    until current_head.val != val 
+        if current_head.next
+            current_head = current_head.next
+        else
+            return nil
+        end
+    end
+
+    previous_node = current_head
+    
+    next_node = previous_node.next 
+    
+    until !next_node
+        if next_node.val == val 
+            previous_node.next = next_node.next
+            next_node = previous_node.next
+
+        else
+            previous_node = next_node
+            next_node = next_node.next
+        end 
+    end
+
+    return current_head
+end
