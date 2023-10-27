@@ -1755,3 +1755,79 @@ def remove_elements(head, val)
 
     return current_head
 end
+
+# -Better compress string
+
+# -Given a string of chars and string ints, where there can be duplicate chars, return an alphabetically ordered string with no repeat chars.
+
+# ex: ‘a3b5c7a3b43’  →return ‘a6b48c7’
+# ex: ‘b3d2a1c12b2a111’ → return ‘a112b5c12d2’
+
+def compress(string)
+	# time complexity == O(n)
+
+	# space complexity == O(1)
+
+	# ‘a3b5c7a3b4’
+	current _letter = "" # “b”
+
+	current_count = "" # “43”
+
+	alphabet = “abcdefghijklmnopqrstuvwxyz”
+
+	Counter = Hash.new(0) # {“” =>  0, “a” => 6 , “b” => 48, “c” => 7}
+	
+	Index = 0 # 11
+	# string.length = 11 
+	While index < string.length 
+		
+		If alphabet.includes?(string[index]) # “3”
+			Counter[current_letter] += current_count.to_i
+			Current_count = “”
+			Current_letter = string[index]
+		Else 
+			Current_count += string[index] # “3”
+		End
+		Index += 1
+	End
+
+	Counter[current_letter] += current_count.to_i
+	
+	Final_string = “” # “a6b48c7”
+
+	Alphabet.each_char do |char| # char = “a”
+		If counter[char]
+			Final_string += char + counter[char].to_str
+		end
+	End
+
+	Return final_string   # “a6b48c7”
+	
+
+
+
+End
+	# if it is a letter, add the count of the letter into the hash, and current letter variable to the new letter, and then reset the count variable to a “”
+
+	#iterate until end of string 
+
+	#iterate through my alphabet string, and then check if the hash has it, and if it does I’ll add it and the count to my final hash
+
+All lowercase letters
+
+combing any compressions 
+
+Ordering the list in alphabetical order 
+
+	# current letter variable 
+
+	# current count variable 
+
+	#  counter hash 
+
+	# while loop to iterate through 
+
+	# inside : check if it’s a letter 
+	
+
+	#return this final string 
