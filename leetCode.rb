@@ -1831,3 +1831,41 @@ Ordering the list in alphabetical order
 	
 
 	#return this final string 
+
+    # Permutaions
+    def permute(nums)
+        # return [nums] if nums.length < 2 
+        # amount of answer arrays is equal to, the length times the previous length 
+    
+        # shallow copy of the previous(recurisve)
+    
+        # an array for final return
+    
+        # pointer = 0 
+    
+        # until looop for pointer and length 
+    
+        # iterate through my current arrays and insert using the pointer 
+       
+        return [nums] if nums.length == 1
+        added_number = nums.pop() #
+    
+        new_array = permute(nums) 
+    
+        return_array = [] 
+    
+        pointer = 0 # 3
+      
+        until pointer == new_array[0].length + 1
+            new_array.each do |subarray| # [0, 1]
+                dup_array = subarray.dup()
+                return_array.push(dup_array.insert(pointer, added_number))
+            end
+            pointer += 1
+        end
+    
+        return return_array
+    
+    
+    
+    end
