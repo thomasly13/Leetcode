@@ -1869,3 +1869,94 @@ Ordering the list in alphabetical order
     
     
     end
+
+    # @param {Integer[]} nums1
+# @param {Integer[]} nums2
+# @return {Float}
+def find_median_sorted_arrays(nums1, nums2)
+
+    pointer1 = 0
+    pointer2 = 0
+
+    median = []
+    size = nums1.length + nums2.length
+
+    counter = 0
+
+    size % 2 == 1 ? target = size / 2 : target = size / 2.0
+
+    if nums1.length == 0 
+        if target.is_a? Float
+            median = [nums2[target], nums2[target - 1]]
+            return median.sum / 2.0
+        else
+            return nums2[target]
+        end
+    elsif nums2.length == 0
+        if target.is_a? Float
+            median = [nums1[target], nums1[target - 1]]
+            return median.sum / 2.0
+        else
+            return nums1[target]
+        end
+    end
+    while median.length != 2
+        if target.is_a? Float
+            if counter == target || counter == target - 1
+            if nums1[pointer1] < nums2[pointer2]
+                number = nums1[pointer1]
+                if pointer1 == nums1.length - 1
+                    nums1[pointer1] = 1000000
+                else
+                    pointer1 += 1
+                end
+            else
+                number = nums2[pointer2]
+                if pointer2 == nums2.length - 1
+                    nums2[pointer2] = 1000000
+                else
+                    pointer2 += 1
+                end
+            end
+            median.push(number)
+
+            else
+                if nums1[pointer1] < nums2[pointer2]
+                    if pointer1 == nums1.length - 1
+                        nums1[pointer1] = 1000000
+                    else
+                        pointer1 += 1
+                    end
+                else
+                    if pointer2 == nums2.length - 1
+                        nums2[pointer2] = 1000000
+                    else
+                        pointer2 += 1
+                    end
+                end
+                counter += 1
+            end
+        else
+            if counter == target
+                return nums1[pointer1] < nums2[pointer2] ? nums1[pointer1] : nums2[pointer2]
+            else
+                if nums1[pointer1] < nums2[pointer2]
+                    if pointer1 == nums1.length - 1
+                        nums1[pointer1] = 1000000
+                    else
+                        pointer1 += 1
+                    end
+                else
+                    if pointer2 == nums2.length - 1
+                        nums2[pointer2] = 1000000
+                    else
+                        pointer2 += 1
+                    end
+                end
+                counter += 1
+            end
+        end
+    end
+    
+    return median.sum / 2.0
+end
