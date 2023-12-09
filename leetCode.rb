@@ -1960,3 +1960,47 @@ def find_median_sorted_arrays(nums1, nums2)
     
     return median.sum / 2.0
 end
+
+def roman_to_int(s)
+    counter = 0
+    split = s.split('')
+    split.each do |char|
+    puts char
+        if char == 'I'
+        counter += 1
+        elsif char == 'V' 
+        counter += 5
+        elsif char == 'X' 
+        counter += 10
+        elsif char == 'L' 
+        counter += 50
+        elsif char == 'C' 
+        counter += 100
+        elsif char == 'D' 
+        counter += 500
+        elsif char == 'M' 
+        counter += 1000
+        end
+    end
+    if s.include?('IV')
+    counter -= 2
+    end
+    if s.include?('IX')
+    counter -= 2
+    end
+    if s.include?('XL')
+    counter -= 20
+    end
+    if s.include?('XC')
+    counter -= 20
+    end
+    if s.include?('CD')
+    counter -= 200
+    end
+    if s.include?('CM')
+    counter -= 200
+    end
+
+
+    return counter
+end
