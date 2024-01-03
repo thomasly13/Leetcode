@@ -2004,3 +2004,62 @@ def roman_to_int(s)
 
     return counter
 end
+
+# Added numbers of laser beams
+def number_of_beams(bank)
+
+    # total amount of lasers
+    laserbeams = 0 
+    
+    return 0 if bank.length == 0
+
+    # have a current row variable
+    current_row_index = 0
+    current_row = bank[0]
+
+    # and a next row variables
+    comparer_row_index = 1
+    comparer_row = bank[1]
+
+    until comparer_row_index == bank.length
+        comparer_lasers = 0
+
+        comparer_row.each_char do |column|
+            comparer_lasers += 1 if column == '1'
+        end
+
+        if comparer_lasers == 0
+            comparer_row_index += 1
+            comparer_row = bank[comparer_row_index]
+            next
+        end
+
+        current_lasers = 0
+        
+        current_row.each_char do |column|
+            current_lasers += 1 if column == '1'
+        end
+
+        if current_lasers == 0
+            current_row_index = comparer_row_index
+            comparer_row_index += 1
+
+            current_row = bank[current_row_index]
+            comparer_row = bank[comparer_row_index]
+            next
+        end
+
+        laserbeams += current_lasers * comparer_lasers
+
+        current_row_index = comparer_row_index
+        comparer_row_index += 1
+
+        current_row = bank[current_row_index]
+        comparer_row = bank[comparer_row_index]
+
+    end
+
+
+    return laserbeams
+    
+end
