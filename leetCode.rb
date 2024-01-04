@@ -2063,3 +2063,40 @@ def number_of_beams(bank)
     return laserbeams
     
 end
+
+# Minimum Number of Operations to Make Array Empty
+def min_operations(nums)
+
+    counter = Hash.new(0)
+
+    nums.each do |num|
+        counter[num] += 1
+    end
+
+    operations = 0
+
+    counter.each_key do |key|
+        return -1 if counter[key] == 1
+
+        current_key = counter[key]
+
+        until current_key == 0
+            if current_key > 4 
+                operations += 1
+                current_key -= 3
+            elsif current_key % 2 == 0
+                operations += 1
+                current_key -= 2
+            else
+                operations += 1
+                current_key -= 3
+            end
+        end
+    
+    end
+
+    return operations
+
+
+
+end
