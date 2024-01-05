@@ -2100,3 +2100,15 @@ def min_operations(nums)
 
 
 end
+
+# Longest Increasing Subsequence
+def length_of_lis(nums)
+    dp = [1] * (nums.length)
+
+    (0...nums.length).each do |i|
+        (0...i).each do |j|
+            dp[i] = [dp[i], 1 + dp[j]].max if nums[i] > nums[j]
+        end
+    end
+    dp.max
+end
