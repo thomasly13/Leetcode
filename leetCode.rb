@@ -2112,3 +2112,26 @@ def length_of_lis(nums)
     end
     dp.max
 end
+
+
+# Maximum difference between node adn ancestor
+def max_ancestor_diff(root)
+    return 0 unless root
+    res = 0
+    stack = []
+    dfs = -> node do
+        val = node.val
+        stack << val
+        left = node.left
+        right = node.right
+        dfs.(left) if left
+        dfs.(right) if right
+        stack.pop
+        stack.each do |anc|
+            res = [res, (anc - val).abs].max
+        end
+    end
+
+    dfs.(root)
+    res
+end
