@@ -2179,3 +2179,21 @@ def three_sum(nums)
     end
     output
   end
+
+  #Minimum NUmber of steps to make two strings anagram
+  def min_steps(s, t)
+    h = Hash.new(0)
+    s.each_char { |ch| h[ch] += 1 }
+  
+    count = 0
+  
+    t.each_char do |ch|
+      if h[ch] > 0
+        h[ch] -= 1
+      else
+        count += 1
+      end
+    end
+  
+    count
+  end
