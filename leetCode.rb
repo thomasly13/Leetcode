@@ -2197,3 +2197,50 @@ def three_sum(nums)
   
     count
   end
+
+  #Insert Delete GetRandom O(1)
+  class RandomizedSet
+    def initialize()
+        @randomized_set = Hash.new
+    end
+
+
+=begin
+    :type val: Integer
+    :rtype: Boolean
+=end
+    def insert(val)
+        flag = true 
+        if @randomized_set.has_key?(val)
+            flag = false 
+        else
+            @randomized_set[val] = true 
+        end 
+        flag 
+    end
+
+
+=begin
+    :type val: Integer
+    :rtype: Boolean
+=end
+    def remove(val)
+        flag = false 
+        if @randomized_set.has_key?(val)
+            flag = true 
+            @randomized_set.delete(val)           
+        end 
+        flag 
+    end
+
+
+=begin
+    :rtype: Integer
+=end
+    def get_random()
+        random = rand(0...@randomized_set.length)        
+        @randomized_set.keys[random]
+    end
+
+
+end
