@@ -2381,3 +2381,14 @@ def p_helper(arr, freq, i, slate, res, n )
         slate.pop 
     end 
 end 
+
+# Rotate image
+def rotate(matrix)
+    for i in (0...matrix.size)
+        for j in ((i + 1)...matrix.size)
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        end
+    end
+
+    matrix.each &:reverse!
+end
