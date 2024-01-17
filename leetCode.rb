@@ -2264,3 +2264,35 @@ def unique_occurrences(arr)
     end
     return true
 end
+
+# Longest Palindrome Substring
+def longest_palindrome(s)
+    str = ""
+    ar = s.split("")
+    rev = s.reverse
+    count = 0
+    (0..ar.length-1).each do |i|
+        elem = ar[i]
+        subs = check_palindrome(s, elem, i)
+        if subs.length > str.length
+            str = subs
+        end
+    end
+    str
+end
+def check_palindrome s,elem,i
+    str = ""
+    count = 0
+    rinx = s.rindex(elem)
+    while( str.length == 0)
+        substr = s.slice(i, rinx-i+1)
+        if substr == substr.reverse && substr.length > count
+            count = substr.length
+            str = substr
+        end
+        break if rinx == 0
+        s = s.slice(0, rinx)
+        rinx = s.rindex(elem)
+    end
+    str
+end
