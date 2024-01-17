@@ -2325,3 +2325,32 @@ def int_to_roman(num)
     end
     ans
 end
+
+#Search in a rotated sorted array
+def search(nums, target)
+    l = 0
+    r = nums.size - 1
+
+    while l <= r
+      mid = (l + r) / 2
+      guess = nums[mid]
+
+      return mid if guess == target
+        
+      if guess >= nums[l]
+        if nums[mid] >= target && target >= nums[l]
+          r = mid - 1
+        else
+          l = mid + 1
+        end
+      else
+        if nums[mid] <= target && target <= nums[r]
+          l = mid + 1
+        else
+          r = mid - 1
+        end
+      end
+    end
+
+    -1
+end
