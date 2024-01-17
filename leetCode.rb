@@ -2296,3 +2296,32 @@ def check_palindrome s,elem,i
     end
     str
 end
+
+# integer to Roman
+def int_to_roman(num)
+    # basic_int_roman_map = {
+    #     "I": 1,
+    #     "IV": 4,
+    #     "V": 5,
+    #     "IX": 9
+    #     "X": 10
+    #     "LX": 40,
+    #     "L": 50,
+    #     "XC": 90,
+    #     "C": 100,
+    #     "CD": 400,
+    #     "D": 500,
+    #     "CM": 900,
+    #     "M": 1000,
+    # }
+    alphas = %w[I IV V IX X XL L XC C CD D CM M]
+    alpha_values = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
+    ans = ""
+    alphas.zip(alpha_values).reverse.each_with_index do |alpha_value, index|
+      while num >= alpha_value[1]
+        ans << alpha_value[0]
+        num -= alpha_value[1]
+      end
+    end
+    ans
+end
