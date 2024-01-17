@@ -2354,3 +2354,30 @@ def search(nums, target)
 
     -1
 end
+
+# Permutations 2
+def permute_unique(nums)
+    freq = nums.tally 
+    # {1 => 2, 2 => 1}
+    res = []
+
+    p_helper(freq.keys, freq, 0, [], res, nums.length )
+
+    res 
+end
+
+def p_helper(arr, freq, i, slate, res, n )
+    if i == n
+        res << slate.dup
+        return 
+    end 
+
+    arr.each do |num|
+        next if freq[num] == 0 
+        slate << num 
+        freq[num] -= 1
+        p_helper(arr, freq, i+1, slate, res, n )
+        freq[num] += 1
+        slate.pop 
+    end 
+end 
