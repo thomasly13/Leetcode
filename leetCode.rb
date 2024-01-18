@@ -2392,3 +2392,15 @@ def rotate(matrix)
 
     matrix.each &:reverse!
 end
+
+# Stairs
+def climb_stairs(n)
+    ways = 1 # Step 0, 1 way.
+    w1, w2 = 0,0 # Step 1 and 2, not calcutated.
+    (1..n).each do |i|
+      w1, w2 = w1 + ways, w2 + ways
+      ways, w1 = w1, w2
+      w2 = 0
+    end
+    return ways
+  end
