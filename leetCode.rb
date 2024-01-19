@@ -2404,3 +2404,18 @@ def climb_stairs(n)
     end
     return ways
   end
+
+
+# Minimum Falling Path Sum
+
+def min_falling_path_sum(matrix)
+    n = matrix.length
+    (n - 1).downto(1) do |i|
+        matrix[i - 1] = matrix[i - 1].map.with_index do |a, j|
+            a + matrix[i][
+                [0, j - 1].max .. [n - 1, j + 1].min
+            ].min
+        end
+    end
+    matrix.first.min
+end
