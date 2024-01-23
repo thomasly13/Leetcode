@@ -2419,3 +2419,44 @@ def min_falling_path_sum(matrix)
     end
     matrix.first.min
 end
+
+# Maximum Length of a concatenated string with unique characters
+def max_length(arr)
+    i = 0
+    selected=Array.new(26,0)
+    len = 0
+    return help(i, arr, selected, len)    
+end
+def help(i, arr, selected, len)
+    return len if i == arr.length
+    currString = arr[i]
+    p compare(selected, currString)
+    if (compare(selected, currString) == false)
+        help(i+1, arr, selected, len)
+    else
+        # pick
+        for j in (0...currString.length)
+            selected[currString[j].ord - "a".ord]=1
+        end
+        len += currString.length
+        op1 = help(i+1, arr, selected, len)
+        # skip
+        for j in (0...currString.length)
+            selected[currString[j].ord - "a".ord]=0
+        end
+        len -=currString.length
+        op2 = help(i+1, arr, selected, len)
+        return [op1,op2].max
+    end
+end
+def compare(selected, currString)
+    selfCheck = Array.new(26,0)
+    for i in (0...currString.length)
+        return false if selfCheck[currString[i].ord - "a".ord] == 1
+        selfCheck[currString[i].ord - "a".ord] = 1
+    end
+    for i in (0...currString.length)
+        return false if selected[currString[i].ord - "a".ord] == 1
+    end 
+    return true
+end
