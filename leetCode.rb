@@ -2460,3 +2460,21 @@ def compare(selected, currString)
     end 
     return true
 end
+
+# Pseudo-Palinfromic Paths in a Binary Tree
+def pseudo_palindromic_paths (root)
+    res = 0
+    memo = Array.new(9, 0)
+
+    job = -> node, memo do
+        memo[node.val - 1] += 1
+        left, right = !node.left.nil?, !node.right.nil?
+        job.call(node.left, memo.dup) if left
+        job.call(node.right, memo.dup) if right
+        unless left || right    # We have reached a leaf node.
+            res += 1 if memo.count(&:odd?) < 2
+        end
+    end
+
+    job.call(root, memo)
+    res
