@@ -2478,3 +2478,18 @@ def pseudo_palindromic_paths (root)
 
     job.call(root, memo)
     res
+
+end
+
+# Longest common sequence 
+def longest_common_subsequence(text1, text2)
+    dp = Array.new(text1.length + 1) { Array.new(text2.length + 1, 0) }
+  
+    (1..text1.length).each do |i|
+      (1..text2.length).each do |j|
+        dp[i][j] = text1[i - 1] == text2[j - 1] ? dp[i - 1][j - 1] + 1 : [dp[i - 1][j], dp[i][j - 1]].max
+      end
+    end
+  
+    dp[text1.length][text2.length]
+  end
