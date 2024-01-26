@@ -2493,3 +2493,23 @@ def longest_common_subsequence(text1, text2)
   
     dp[text1.length][text2.length]
   end
+
+# Out of Boundary Paths
+def find_paths(m, n, max_move, start_row, start_column)
+    map = Array.new(m) { Array.new(n) { Array.new(max_move + 1) } }
+    dp(m, n, max_move, start_row, start_column, map) % (10**9 + 7)
+  end
+  
+  def dp(m, n, moves_left, i, j, map)
+    return 1 if i < 0 || j < 0 || i >= m || j >= n
+    return 0 if moves_left < 1
+  
+    map[i][j][moves_left] ||= begin
+      paths = 0
+  
+      paths += dp(m, n, moves_left - 1, i + 1, j, map)
+      paths += dp(m, n, moves_left - 1, i - 1, j, map)
+      paths += dp(m, n, moves_left - 1, i, j + 1, map)
+      paths + dp(m, n, moves_left - 1, i, j - 1, map)
+    end
+  end
