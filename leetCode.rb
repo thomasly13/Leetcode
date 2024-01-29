@@ -2513,3 +2513,26 @@ def find_paths(m, n, max_move, start_row, start_column)
       paths + dp(m, n, moves_left - 1, i, j - 1, map)
     end
   end
+
+  # Implement Queue using Stacks
+  class MyQueue
+    def initialize
+      @queue = []
+    end
+  
+    def push(x)
+      @queue.push(x)
+    end
+  
+    def pop
+      @queue.shift
+    end
+  
+    def peek
+      @queue.first
+    end
+  
+    def empty
+      @queue.empty?
+    end
+  end
