@@ -2536,3 +2536,19 @@ def find_paths(m, n, max_move, start_row, start_column)
       @queue.empty?
     end
   end
+
+
+# Evaluate Reverse Polish Notation
+OPERATIONS = %w[+ - / *].to_set
+
+def eval_rpn(tokens)
+  stack = []
+  tokens.each do |item|
+    next stack << item.to_i if !OPERATIONS.include?(item)
+
+    val2, val1 = stack.pop, stack.pop
+    stack << val1.to_f.send(item, val2).to_i # because 6/-132 = -1
+  end
+
+  stack[0]
+end
