@@ -2552,3 +2552,19 @@ def eval_rpn(tokens)
 
   stack[0]
 end
+
+# Daily Temperature
+def daily_temperatures(temps)
+    results = Array.new(temps.length, 0)
+    stack = []
+    # UPVOTE !
+    temps.each_with_index do |temp, i|
+      while !stack.empty? && temps[stack.last] < temp
+        index = stack.pop
+        results[index] = i - index
+      end
+      stack.push(i)
+    end
+
+    results
+  end
