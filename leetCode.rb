@@ -2568,3 +2568,34 @@ def daily_temperatures(temps)
 
     results
   end
+
+# Sequential Digits
+def queue_mega_generator size
+    answer = []
+    start = 0
+    while start < 9
+        digit_string = ""
+        tmp = start 
+        size.times do
+            tmp = tmp + 1
+            break if tmp > 9
+            digit_string += tmp.to_s 
+        end
+        break if digit_string.size < size
+        answer.push digit_string.to_i
+        start += 1
+    end
+    answer
+end
+# @param {Integer} low
+# @param {Integer} high
+# @return {Integer[]}
+def sequential_digits(low, high)
+    answer = []
+    min = low.to_s.size
+    max = high.to_s.size
+    (min..max).each do |size|
+        answer += queue_mega_generator(size).select{|x| x.between?(low,high)}
+    end
+    answer
+end
