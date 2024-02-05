@@ -2599,3 +2599,14 @@ def sequential_digits(low, high)
     end
     answer
 end
+
+# Furst unique character
+def first_uniq_char(s)
+    freq = s.chars.tally 
+
+    s.chars.each_with_index do |char, i|
+        return i if freq[char] == 1 
+    end 
+
+    return -1 
+end
