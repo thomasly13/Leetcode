@@ -2654,3 +2654,30 @@ def num_squares(n)
     return 3 if n.prime_division.any? { |p, e| p % 4 == 3 && e.odd? }
     (n**0.5).to_i**2 == n ? 1 : 2
   end
+
+
+#Largest divisible subset
+def largest_divisible_subset(nums)
+    @nums, @cache, max = nums.sort, {}, []
+  
+    @nums.each_with_index do |_, i|
+      subset = dp(i)
+      max = subset if subset.length > max.length
+    end
+  
+    max
+  end
+  
+  def dp(i)
+    return @cache[i] if @cache.key?(i)
+    
+    max_subset = []
+    (i+1...@nums.length).each do |j| # Start from i+1 to avoid self-comparison
+      if @nums[j] % @nums[i] == 0
+        subset = dp(j)
+        max_subset = subset if subset.length > max_subset.length
+      end
+    end
+  
+    @cache[i] = [@nums[i]] + max_subset # Correct reference to @nums
+  end
