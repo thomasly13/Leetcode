@@ -2681,3 +2681,19 @@ def largest_divisible_subset(nums)
   
     @cache[i] = [@nums[i]] + max_subset # Correct reference to @nums
   end
+
+  # Majority Element
+  def majority_element(nums)
+
+    n = (nums.length / 2.0)
+    counter = Hash.new(0)
+
+    nums.each do |num|
+        counter[num] += 1
+        if counter[num] > n 
+            return num
+        end
+    end
+    
+
+end
