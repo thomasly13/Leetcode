@@ -2697,3 +2697,16 @@ def largest_divisible_subset(nums)
     
 
 end
+
+
+# Find First Palinfromic String in the Array
+def first_palindrome(words)
+    first = ""
+    words.each do |word|
+      first = word
+      if word.eql?(first.reverse)
+        return word
+      end
+    end
+    return ""
+  end
