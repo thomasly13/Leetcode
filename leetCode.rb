@@ -2710,3 +2710,22 @@ def first_palindrome(words)
     end
     return ""
   end
+
+
+# Find Polygon with the largest perimeter
+def largestPerimeter(nums)
+    nums.sort!
+    ans = -1
+    n = nums.size
+    prefix = Array.new(n, 0)
+    prefix[0] = nums[0]
+    for i in 1...n
+        prefix[i] = prefix[i-1] + nums[i]
+    end
+    for i in 2...nums.size
+        if prefix[i] - nums[i] > nums[i]
+            ans = prefix[i]
+        end
+    end
+    return ans
+end
