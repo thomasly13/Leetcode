@@ -2772,3 +2772,17 @@ def furthest_building(heights, bricks, ladders)
     
     true
   end
+
+  # reverse integer
+  def reverse(x)
+    a = x.to_s
+    if a.reverse.to_i > 2147483648
+    return 0
+    end
+    if x < 0
+    return ("-" + a.reverse.chop).to_i
+    
+    else
+    return a.reverse.to_i
+    end   
+    end
