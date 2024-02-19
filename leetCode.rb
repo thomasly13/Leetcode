@@ -2786,3 +2786,10 @@ def furthest_building(heights, bricks, ladders)
     return a.reverse.to_i
     end   
     end
+
+# Power of 2
+def is_power_of_two(n)
+    return false if n == 0
+
+    n & (n - 1) == 0
+end
