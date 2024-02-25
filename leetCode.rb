@@ -2793,3 +2793,27 @@ def is_power_of_two(n)
 
     n & (n - 1) == 0
 end
+
+# Poison duration
+def find_poisoned_duration(time_series, duration)
+    if duration == 0
+        return 0
+    end
+    
+
+    last_t_poisoned = -1
+    total = 0
+    time_series.each do |t|
+        if last_t_poisoned < t
+            total += duration
+            last_t_poisoned = t + duration - 1
+        else
+            next_last_t_poisoned = t + duration - 1
+            total += next_last_t_poisoned - last_t_poisoned 
+            last_t_poisoned = next_last_t_poisoned
+        end
+
+    end
+
+    total
+end
