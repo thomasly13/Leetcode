@@ -2817,3 +2817,29 @@ def find_poisoned_duration(time_series, duration)
 
     total
 end
+
+
+# Remove duplicates from an array 2
+def remove_duplicates(nums)
+    current = nums[0]
+    count = i = 1
+    while i < nums.size
+        if nums[i] == current 
+            count += 1 
+            if count > 2 
+                k = i+1 
+                while nums[k] == nums[i]
+                    k += 1
+                end
+                nums[i..] = nums[k..]
+                count = 1
+            end
+        else 
+            count = 1
+        end
+        current = nums[i]
+        i += 1
+    end
+    
+    nums.size
+end
