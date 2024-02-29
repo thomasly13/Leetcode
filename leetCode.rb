@@ -2843,3 +2843,31 @@ def remove_duplicates(nums)
     
     nums.size
 end
+
+# first bad version
+def first_bad_version(n)
+    return n if !is_bad_version(n - 1) || n == 1
+    return 1 if is_bad_version(1)
+    left = 1
+    right = n
+
+
+    flag = false
+    until flag
+        middle = left + ((right - left) / 2)
+        if is_bad_version(middle)
+            right = middle
+        else 
+            left = middle
+        end
+
+        if left == right - 1
+            if is_bad_version(left)
+                return left
+            end
+            flag = true
+        end
+    end
+
+    right
+end
