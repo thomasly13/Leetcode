@@ -2871,3 +2871,11 @@ def first_bad_version(n)
 
     right
 end
+
+# Maximum Odd Binary Number
+def maximum_odd_binary_number(s)
+    ones = s.count('1')
+    zeros = s.size - ones
+  
+    '1' * (ones - 1) + '0' * zeros + '1'
+  end
