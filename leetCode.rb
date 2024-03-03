@@ -2879,3 +2879,27 @@ def maximum_odd_binary_number(s)
   
     '1' * (ones - 1) + '0' * zeros + '1'
   end
+
+  # remove nth element from the end
+  def remove_nth_from_end(head, n)
+    if head == nil or head.next == nil 
+        return nil
+    end
+    dummy = ListNode.new(0)
+    dummy.next = head
+    count = 0
+
+    iterate = head
+    while iterate != nil
+        count+=1
+        iterate = iterate.next 
+    end
+    count-=n
+    prev = dummy
+    for a in 1..count do
+        prev = prev.next
+    end
+
+    prev.next = prev.next.next
+    return dummy.next
+end
