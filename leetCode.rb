@@ -2903,3 +2903,15 @@ def maximum_odd_binary_number(s)
     prev.next = prev.next.next
     return dummy.next
 end
+
+# minimum length of stirng after deleting similar ends
+
+def minimum_length(s)
+    l, r = 0, s.size - 1
+    while l < r && s[l] == s[r] do
+        c = s[l]
+        l += 1 while l <= r && s[l] == c
+        r -= 1 while r >= l && s[r] == c
+    end
+    r - l + 1    
+end
