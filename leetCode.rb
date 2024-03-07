@@ -2915,3 +2915,13 @@ def minimum_length(s)
     end
     r - l + 1    
 end
+
+# middle of a linked-list
+def middle_node(head)
+    fast = middle = head
+    while fast && fast.next do
+        middle = middle.next
+        fast = (fast.next).next
+    end
+    return middle
+end
