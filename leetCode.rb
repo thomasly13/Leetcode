@@ -2946,3 +2946,61 @@ def get_common(nums1, nums2)
   
     -1
   end
+
+# spiral matrix 2
+def generate_matrix(n)
+    # create the matrix and populate with nil
+    matrix = Array.new(n) { |y| Array.new(n) { |x| nil } }
+
+    # because 0 index, we decrease n by 1 to define the boundaries
+    # for our matrix
+    lim = n - 1
+
+    # Short for direction x and direction y. Implies the velocity
+    # against each axis. We use this to know how to modify the x,y
+    # pointers during each iteration.
+    dx, dy = 1, 0
+
+    # x, y pointers initialized to row 0, col 0
+    x, y = 0, 0
+
+    # we iterate from 1 -> n*n (n*n is our target number)
+    1.upto(n * n) do |num|
+        # write the current num to the matrix at x, y
+        matrix[y][x] = num
+
+        # out of bounds!
+        # basically this determines if the next iteration will put
+        # the value of x or y at values less than 0 or greater than lim
+        oob = x + dx > lim || x + dx < 0 || y + dy > lim || y + dy < 0
+        
+        # checks if the next position has already been written
+        # to (i.e) is not nil. Use oob to actually
+        # avoid reading out of bounds
+        should_turn = oob || matrix[y + dy][x + dx] != nil
+
+        # we basically want to turn right if the above condition is met
+        if should_turn
+            # so if the velocity of dy is 0
+            # we want to follow the direction of dx
+            if dy == 0
+                dy = dx
+                dx = 0
+
+            # otherwise, it's implicit that dx is 0 if dy is not.
+            # The inverse of the rule for dy applies here - if
+            # dy was -1, dx should be 1. Seems weird, but go follow
+            # the problem explanation, it checks out lol.
+            else
+                dx = -dy
+                dy = 0
+            end
+        end
+
+        # adjust the pointers using the velocity modifiers
+        x += dx
+        y += dy
+    end
+
+    matrix
+end
