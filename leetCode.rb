@@ -2933,3 +2933,16 @@ def reverse(x)
   
     x.negative? ? -s.to_i : s.to_i
 end
+
+#Minimum Common Value
+def get_common(nums1, nums2)
+    i = j = 0
+  
+    while i < nums1.count && j < nums2.count
+      return nums1[i] if nums1[i] == nums2[j]
+        
+      nums1[i] > nums2[j] ? j += 1 : i += 1
+    end
+  
+    -1
+  end
