@@ -3004,3 +3004,66 @@ def generate_matrix(n)
 
     matrix
 end
+
+# Remove Zero Sum Consecutive
+def remove_zero_sum_sublists(head)
+    nodes = []
+    node = head
+    total_index_hash = {}
+    total = 0
+    while node
+        total += node.val 
+        # Reset nodes and total_index_hash as our total
+        # reached 0 meaning all nodes evened out.
+        if total == 0
+            nodes = []
+            total_index_hash = {}
+        else
+            # If we ran into this total before...
+            if total_index_hash[total]
+                # Remove all node totals we have stored in our
+                # total index hash based on the nodes
+                # we are deleting from our nodes array.
+                if nodes[(total_index_hash[total] + 1)..-1]
+                    nodes[(total_index_hash[total] + 1)..-1].each do |node_arr|
+                        total_index_hash.delete node_arr[1]
+                    end
+                end
+
+                # Remove nodes from nodes array from the point
+                # of where we hit our total in the past.
+                nodes = nodes[0..total_index_hash[total]]
+            # When we havent hit this total before we store it's index
+            # and add our node to our nodes array.
+            else
+
+                total_index_hash[total] = nodes.size
+
+                if node.val != 0
+                    nodes << [node, total]
+                end
+            end
+        end
+        # Remove relationship between node and next node.
+        prev_node = node
+        
+        # Set our node for our next iteration.
+        node = node.next
+        prev_node.next = nil
+    end
+
+    # Reassemble the linked list and return the head.
+    if nodes.size > 0
+        node = nodes[0][0]
+        nodes[1..-1].each do |node_arr|
+            node.next = node_arr[0]
+            node = node_arr[0]
+        end
+
+        nodes[0][0]
+    else
+        nil
+    end
+
+    
+end
