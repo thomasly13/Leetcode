@@ -3067,3 +3067,18 @@ def remove_zero_sum_sublists(head)
 
     
 end
+
+# find the pivot integer
+def pivot_integer(n)
+    left_sum = (n * (n + 1)) / 2
+    right_sum = 0
+
+    while left_sum > right_sum
+      right_sum += n
+      return n if right_sum == left_sum
+      left_sum -= n
+      n -= 1
+    end
+
+    -1
+  end
