@@ -3082,3 +3082,30 @@ def pivot_integer(n)
 
     -1
   end
+
+
+# Binary Subarrays with sum
+
+def num_subarrays_with_sum(nums, goal)
+    if goal == 0
+      
+  
+      nums
+        .chunk_while(&:==)  
+        .filter{_1[0] == 0}
+        .map(&:length)  
+        .map{(_1 * _1 + _1) / 2} 
+        .sum  
+    else
+       
+  
+      [1, *nums, 1]  
+        .each_with_index 
+        .filter{_1[0] == 1} 
+        .map{_1[1]}
+        .each_cons(goal + 2)  
+        .map{_1.first(2) + _1.last(2)}  
+        .map{|m, i, j, n| (i - m) * (n - j)} 
+        .sum  
+    end
+  end
