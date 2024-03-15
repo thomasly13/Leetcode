@@ -3109,3 +3109,21 @@ def num_subarrays_with_sum(nums, goal)
         .sum  
     end
   end
+
+
+# Product of Array Except Self
+def product_except_self(nums)
+    answer = Array.new(nums.length, 1)
+
+    nums.each_with_index do |num, index|
+        (0...index).each do |index2|
+            answer[index2] *= num
+        end
+
+        ((index + 1)...nums.length).each do |index3|
+            answer[index3] *= num
+        end
+
+    end
+    answer
+end
