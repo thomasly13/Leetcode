@@ -3178,3 +3178,23 @@ def insert(intervals, new_interval)
     result << new_interval
     result
 end
+
+
+# Remove Element
+def remove_element(nums, val)
+
+    counter = 0
+
+    nums.each_with_index do |ele, index|
+        
+        if (ele == val)
+            counter += 1
+            nums[index] = 100000000
+        end
+    end
+
+
+    nums.sort!
+    
+    return nums.length - counter
+end
