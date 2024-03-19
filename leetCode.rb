@@ -3198,3 +3198,23 @@ def remove_element(nums, val)
     
     return nums.length - counter
 end
+
+# Remove Element
+def remove_element(nums, val)
+
+    counter = 0
+
+    nums.each_with_index do |ele, index|
+        
+        if (ele != val)
+            nums[index] = 1000
+            nums[counter] = ele
+            counter += 1
+        else 
+            nums[index] = 1000
+        end
+    end
+
+
+    return counter
+end
