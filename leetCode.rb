@@ -3218,3 +3218,10 @@ def remove_element(nums, val)
 
     return counter
 end
+
+#Duplicate Number
+def find_duplicate(nums)
+    h = nums.tally # constant space
+    h.each { |k,v| return k if v > 1 }
+    0
+ end
