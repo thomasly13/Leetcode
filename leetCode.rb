@@ -3225,3 +3225,17 @@ def find_duplicate(nums)
     h.each { |k,v| return k if v > 1 }
     0
  end
+
+
+# Find all duplicates in an array
+def find_duplicates(nums)
+    nums.map do |num|
+      index = num.abs - 1
+
+      if nums[index] < 0
+        num.abs
+      else
+        nums[index] = -nums[index] and next
+      end
+    end.compact
+end
