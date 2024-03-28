@@ -44,3 +44,32 @@ loop(array)
             final_word += word1[counter1:]
         
         return final_word
+
+#Can Place FLowers
+
+
+    def canPlaceFlowers(self, flowerbed, n):
+        
+        current_bed = 0 
+        flowerbed_length = len(flowerbed)
+
+        counter = 0
+
+        if flowerbed_length == 1 and flowerbed[0] == 0:
+            counter += 1
+            return (counter >= n)
+
+        while current_bed < flowerbed_length:
+            if flowerbed[current_bed] != 1:
+                if current_bed == 0 and flowerbed[current_bed + 1] != 1:
+                    flowerbed[current_bed] = 1
+                    counter += 1
+                elif flowerbed[current_bed - 1] != 1:
+                    if current_bed == flowerbed_length - 1 or flowerbed[current_bed + 1] != 1:
+                        flowerbed[current_bed] = 1
+                        counter += 1
+                current_bed += 1
+            else:
+                current_bed += 1
+                
+        return (counter >= n)
