@@ -73,3 +73,7 @@ loop(array)
                 current_bed += 1
                 
         return (counter >= n)
+
+# Isomorphic Strings
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(s))==len(set(zip(s,t)))==len(set(t))
