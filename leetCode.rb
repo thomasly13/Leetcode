@@ -3239,3 +3239,20 @@ def find_duplicates(nums)
       end
     end.compact
 end
+
+
+# Reveal cards in increasing order
+def deck_revealed_increasing(deck)
+    sorted_deck = deck.sort
+
+    final_deck = [sorted_deck.pop]
+
+    until sorted_deck.length == 0
+        top_card = sorted_deck.pop
+        second_card = final_deck.pop
+
+        final_deck = [top_card, second_card] + final_deck
+    end
+
+    return final_deck
+end
