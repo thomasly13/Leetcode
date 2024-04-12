@@ -3256,3 +3256,78 @@ def deck_revealed_increasing(deck)
 
     return final_deck
 end
+
+
+
+# Trapping Rain Water
+def find_max(array, side="L")
+    max_value = array.max
+    if side == "L"
+      last_max_index = array.index(max_value)
+    else
+      last_max_index = array.rindex(max_value)
+    end
+    #puts "find_max: #{array} > #{side} > #{last_max_index}"
+    last_max_index
+  end
+  
+  def special_case(area)
+    return (area.length < 3 || (area.length == 3 && (area[0]==0 || area[area.length-1] ==0)))
+  end
+  
+  def calc_cap(area)
+    #print "calc_cap area: #{area} " 
+    
+    if special_case(area)
+      total = 0
+    else
+      r_wall = area.pop
+      l_wall = area.shift 
+      min_height = [l_wall, r_wall].min
+      total = (min_height * area.length) - area.sum
+    end
+  #  puts "total:  #{total}"
+    total 
+  end
+  
+  def trap(height)
+    # special cases
+    return 0 if special_case(height)
+    
+    rango = height
+    cap_total = 0
+  
+    r_rango = nil
+    while rango.length > 2
+      r_wall = find_max(rango, "R")
+  
+      # define right side if exists ;)     
+      if r_rango.nil?
+        r_rango = rango[r_wall..]
+      end
+  
+      sub_rango = rango[0..r_wall-1]
+      l_wall = find_max(sub_rango, "L")
+      area = rango[l_wall..r_wall]
+      cap_total += calc_cap(area)
+  
+      #define new rango
+      rango = rango[0..l_wall]
+    end
+  
+    # start with right side 
+    rango = r_rango
+    while rango.length > 2
+      r_wall = find_max(rango[1..], "R")+1    
+      sub_rango = rango[0..r_wall-1]
+      l_wall = find_max(sub_rango, "L")
+      area = rango[l_wall..r_wall]
+      cap_total += calc_cap(area)
+  
+      #define new rango
+      rango = rango[r_wall..rango.length-1]
+     # puts "new rango: #{rango}" 
+    end
+  
+    cap_total
+  end
