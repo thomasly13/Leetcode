@@ -3331,3 +3331,40 @@ def find_max(array, side="L")
   
     cap_total
   end
+
+
+# Four Sum
+def max_four(nums)
+    count = nums.tally
+    arr = []
+    count.each do |k,v|
+        ([v,4].min).times { arr << k }
+    end
+    arr
+end
+
+
+def four_sum(nums, target)
+    nums = max_four(nums)
+    res = Set[]
+    
+    #hash: sum is key, array of pairs of indices is value
+    two_sum = Hash.new { |h,k| h[k] = [] }
+    
+    (0...nums.length).each do |a|
+        (a+1...nums.length).each do |b|
+            sum = nums[a] + nums[b]
+            
+            two_sum[target - sum].each do |pair|
+                if ([a,b] + pair).uniq.length == 4
+                    c,d = pair
+                    res.add([nums[a],nums[b],nums[c],nums[d]].sort)
+                end
+            end
+            
+            two_sum[sum] << [a,b]
+        end
+    end
+    
+    res.to_a
+end
