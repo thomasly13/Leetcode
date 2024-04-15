@@ -3428,3 +3428,17 @@ def calculate_max_rectangle(heights, left_boundaries, right_boundaries, max_rect
     end
     max_rectangle
 end
+
+
+# Sum root to leaf numbers
+def sum_numbers(root)
+    children(root, '').map(&:to_i).sum
+end
+
+def children(node, path)
+  ans = []
+  ans << children(node.left,  path + node.val.to_s) if node.left
+  ans << children(node.right, path + node.val.to_s) if node.right
+  ans << path + node.val.to_s if !node.left and !node.right
+  ans.flatten
+end
