@@ -3442,3 +3442,18 @@ def children(node, path)
   ans << path + node.val.to_s if !node.left and !node.right
   ans.flatten
 end
+
+
+# Combination Sum
+def combination_sum(candidates, target)
+    candidates.sort.flat_map do |candidate|
+     if candidate == target
+         [[candidate]]
+     elsif candidate < target
+         combination_sum(candidates.select { |c| c >= candidate }, target - candidate)
+             .map { |combo| [candidate] + combo }
+     else
+         []
+     end
+ end
+end
