@@ -3457,3 +3457,31 @@ def combination_sum(candidates, target)
      end
  end
 end
+
+# Merger alternatively
+def merge_alternately(word1, word2)
+    # while loop, where theres a counter and it keeps going until the length of one of the words
+
+    # Adds the word index to the final word string 
+
+    final_word = ""
+
+    counter = 0
+
+    word1_length = word1.length
+    word2_length = word2.length 
+
+    while counter != word1.length && counter != word2.length 
+        final_word += word1[counter] + word2[counter]
+        counter += 1
+    end
+
+    if counter == word1.length 
+        return final_word + word2[counter..-1]
+    else 
+        return final_word + word1[counter..-1]
+    end
+
+    
+
+end
