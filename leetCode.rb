@@ -3523,3 +3523,28 @@ def find_farmland(land)
   
     false
   end
+
+  # Pow (X, Y)
+  def my_pow(x, n)
+    return 1 if n == 0
+
+    return x if n == 1
+
+    result = cal_power(x,n.abs)
+
+    n < 0 ? (1/result) : result
+end
+
+def cal_power(x, n)
+    return 1 if n == 0
+
+    return x if n == 1
+
+    result = cal_power(x, n/2)
+
+    if n % 2 != 0 # n.odd? # check for odd
+        result * result * x
+    else
+        result * result
+    end
+end 
