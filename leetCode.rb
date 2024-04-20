@@ -3485,3 +3485,41 @@ def merge_alternately(word1, word2)
     
 
 end
+
+# Find all groups of farmland
+def find_farmland(land)
+    farm_lends = []
+    land.each_with_index do |row, i|
+      row.each_with_index do |value, j|
+        if value == FARMLEND && is_started_farmlend?(land, i, j)
+          start_farm_lend = [i, j] 
+          end_farm_lend = find_end_of_farmlend(land, i, j)
+          farm_lends << start_farm_lend.concat(end_farm_lend) 
+        end  
+      end
+    end
+    farm_lends
+  end
+  
+  def is_started_farmlend?(land, i, j)
+    left_value = j == 0 ? FOREST : land.dig(i)&.dig(j - 1).to_i
+    up_value = i == 0 ? FOREST : land.dig(i - 1)&.dig(j).to_i
+    return true if (left_value + up_value).zero?
+  
+    false
+  end
+  
+  def find_end_of_farmlend(land, i, j)
+    return i, j  if is_ended_farmlend?(land, i, j)
+    return find_end_of_farmlend(land, i, j + 1) if land.dig(i)&.dig(j + 1) == FARMLEND
+    return find_end_of_farmlend(land, i + 1, j) if land.dig(i + 1)&.dig(j) == FARMLEND
+    return find_end_of_farmlend(land, i + 1, j + 1)
+  end
+  
+  def is_ended_farmlend?(land, i, j)
+    right_value = land.dig(i)&.dig(j + 1).to_i
+    bottom_value = land.dig(i + 1)&.dig(j).to_i
+    return true if (right_value + bottom_value).zero?
+  
+    false
+  end
