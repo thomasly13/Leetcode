@@ -3548,3 +3548,80 @@ def cal_power(x, n)
         result * result
     end
 end 
+
+# Product of Array except self
+def product_except_self(nums)
+
+    final_array = Array.new(nums.length)
+
+    current_product = product_of_array(nums[1..-1]).to_f
+
+    if current_product == 0 || nums[0] == 0
+        final_array = product_if_zero(nums, final_array, current_product)
+    else 
+        final_array = product_if_norm(nums, final_array, current_product)
+    end
+    
+    
+
+    return final_array
+
+end
+
+def product_if_zero(array, final_array, current_product)
+    product = array[0]
+
+    if array[0] == 0
+        product = 1
+        array[1..-1].each_with_index do |num, index|
+            product = product * num
+            final_array[index + 1] = 0
+        end
+
+        final_array[0] = product
+    else
+        zero_index = 0 
+        final_array[0] = 0
+        array[1..-1].each_with_index do |num, index|
+
+            if zero_index != 0 && num == 0 
+                final_array[index + 1] = 0
+                product = 0
+            elsif num == 0
+                zero_index = index + 1
+            else 
+                product = product * num
+                final_array[index + 1] = 0            
+            end
+
+        end
+        final_array[zero_index] = product
+
+    end
+
+    final_array
+end
+
+def product_if_norm(array, final_array, current_product)
+
+    array.each_with_index do |num, index|
+        if index == 0
+            final_array[0] = current_product.to_i
+        else          
+            current_product = current_product / num
+            current_product = current_product * array[index - 1]
+            final_array[index] = current_product.to_i 
+        end
+    end
+
+    final_array 
+end
+
+def product_of_array(array)
+    product = 1
+    array.each do |num|
+        product = product * num
+    end
+
+    product
+end
