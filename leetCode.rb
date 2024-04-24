@@ -3625,3 +3625,29 @@ def product_of_array(array)
 
     product
 end
+
+
+# Move zeroes
+def move_zeroes(nums)
+    counter = 0 
+
+    zero_counter = nums.length - 1
+
+    tracker = {}
+ 
+    nums.each do |num|
+        if num == 0
+            tracker[zero_counter] = 0
+            zero_counter -= 1
+        else 
+            tracker[counter] = num        
+            counter += 1
+        end
+    end
+    
+    (0...nums.length).each do |count|
+        nums[count] = tracker[count]
+    end
+    
+    return nums
+end
