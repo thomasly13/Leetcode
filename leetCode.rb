@@ -3651,3 +3651,23 @@ def move_zeroes(nums)
     
     return nums
 end
+
+
+# Tribonacci Number
+def tribonacci(n)
+    trib_hash = { 0 => 0, 1 => 1, 2 => 1}
+
+    counter = 3
+
+    return trib_hash[n] if trib_hash[n]
+
+    until trib_hash[n]
+        trib_hash[counter] = trib_hash[counter - 1] + trib_hash[counter - 2] + trib_hash[counter - 3]
+        counter += 1
+    end
+
+    trib_hash[n]
+        
+
+    
+end
