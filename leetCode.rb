@@ -3671,3 +3671,35 @@ def tribonacci(n)
 
     
 end
+
+
+# Minimum falling path
+def min_falling_path_sum(grid)
+    @grid = grid
+    @n = grid.length
+    (0...@n).each do |i|
+        (0...@n).each do |j|
+            grid[i][j] = [grid[i][j],j]
+        end
+    end
+
+    grid.map! { |row| row.sort }
+    grid.map! { |row| row.length > 2 ? row[0..2] : row }
+
+    @memo = {}
+
+    min_sum(0,nil)
+end
+
+def min_sum(row,col)
+    return 0 if row == @n
+    return @memo[[row,col]] if @memo[[row,col]]
+
+    options = []
+    @grid[row].each do |arr|
+        val,c = arr
+        options << min_sum(row+1,c) + val unless col == c
+    end
+
+    @memo[[row,col]] = options.min
+end
