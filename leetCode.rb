@@ -3729,3 +3729,20 @@ def reverse(x)
   
     x.negative? ? -s.to_i : s.to_i
   end
+
+
+# NExt Permutations
+def next_permutation(nums)
+    i = nums.length - 2
+    while i >= 0 && nums[i] >= nums[i+1]
+        i -= 1
+    end
+    if i >= 0
+        j = nums.length - 1
+        while j >=0 && nums[j] <= nums[i]
+            j -= 1
+        end
+        nums[i], nums[j] = nums[j], nums[i]
+    end
+    nums[i + 1..-1] = nums[i + 1..-1].reverse
+end
