@@ -3703,3 +3703,21 @@ def min_sum(row,col)
 
     @memo[[row,col]] = options.min
 end
+
+# freedom trail
+def find_rotate_steps r, t
+    return t.size if (r = r.bytes).uniq.size < 2
+    s, z, r = {0 => 0}, r.size, r.each_index.group_by { r[_1] }
+    t.bytes.each do
+        e, cj = Hash.new(1e5), r[_1]
+        s.each do | i, v |
+            v += 1
+            for j in cj
+                d = (i - j).abs
+                e[j] = [e[j], v + [d, z - d].min].min
+            end
+        end
+        s = e
+    end
+    s.each_value.min
+end
