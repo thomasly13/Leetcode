@@ -3721,3 +3721,11 @@ def find_rotate_steps r, t
     end
     s.each_value.min
 end
+
+# Reverse Integer
+def reverse(x)
+    s = x.abs.to_s.reverse
+    return 0 if s.to_i > (2**31 - 1)
+  
+    x.negative? ? -s.to_i : s.to_i
+  end
