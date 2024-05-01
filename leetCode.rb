@@ -3746,3 +3746,17 @@ def next_permutation(nums)
     end
     nums[i + 1..-1] = nums[i + 1..-1].reverse
 end
+
+# Reverse Prefix of Word
+def reverse_prefix(word, ch)
+    prefix = ""
+
+    word.each_char.with_index do |char, index|
+        if char != ch
+            prefix = char + prefix
+        else 
+            return char + prefix + word[(index + 1)..-1]
+        end
+    end
+end
+
