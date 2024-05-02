@@ -3760,3 +3760,20 @@ def reverse_prefix(word, ch)
     end
 end
 
+# Reverse Prefix of Word
+def reverse_prefix(word, ch)
+    prefix = ""
+
+    index = 0
+
+    while index < word.length
+        if word[index] != ch
+            prefix = word[index] + prefix
+            index += 1
+        else 
+            return word[index] + prefix + word[(index + 1)..-1]
+        end
+    end
+
+    return word
+end
