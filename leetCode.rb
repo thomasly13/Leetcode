@@ -3777,3 +3777,18 @@ def reverse_prefix(word, ch)
 
     return word
 end
+
+# Boats to save people
+def num_rescue_boats(people, limit)
+    people.sort!
+    ships = 0
+    left, right = 0, people.length - 1
+    while left <= right
+        if people[left] + people[right] <= limit
+            left += 1
+        end
+        right -= 1
+        ships += 1
+    end
+    ships
+end
