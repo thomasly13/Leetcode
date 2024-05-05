@@ -3792,3 +3792,10 @@ def num_rescue_boats(people, limit)
     end
     ships
 end
+
+
+# Delete Node
+def delete_node(node)
+    node.val = node.next.val
+    node.next = node.next.next
+end
