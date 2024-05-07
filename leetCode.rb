@@ -3813,3 +3813,61 @@ def combination_sum(candidates, target)
      end
  end
 end
+
+
+# Remove Nodes from Linked List
+def remove_nodes(head)
+
+    # Reverse the linked list
+
+    # Then compare, changing the comparer if a greater value comes up
+
+    return head if !head.next
+
+    head = reverse_list(head)
+
+    comparer = head.val
+    
+    current_node = head.next
+
+    previous_node = head
+
+    while current_node 
+        if current_node.val < comparer
+            previous_node.next = current_node.next
+            current_node = current_node.next
+        else 
+            comparer = current_node.val
+            previous_node = current_node
+            current_node = current_node.next
+        end
+    end
+
+    return reverse_list(head)
+end
+
+def reverse_list(head)
+
+    return head if !head.next
+
+    current_node = head.next 
+
+    previous_node = head 
+
+    previous_node.next = nil
+
+    while true
+        next_node = current_node.next 
+
+        current_node.next = previous_node 
+
+        previous_node = current_node
+
+        if next_node
+            current_node = next_node
+        else 
+            return current_node
+        end
+    end
+
+end
