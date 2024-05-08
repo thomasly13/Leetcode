@@ -3871,3 +3871,34 @@ def reverse_list(head)
     end
 
 end
+
+# Double a Linked List
+def double_it(head)
+
+    # Record the complete number as a string
+    number = ""
+
+    current_node = head 
+
+    while current_node
+        number += current_node.val.to_s
+        current_node = current_node.next
+    end
+
+    # Double the number and split the digits into an array
+    number = number.to_i * 2
+
+    array = number.to_s.split("").map{ |num| num.to_i }
+    
+    # Create a new Linked List, which uses the array to create the nodes
+    new_head = ListNode.new(array.shift())
+
+    current_node = new_head
+
+    array.each do |num|
+        current_node.next = ListNode.new(num)
+        current_node = current_node.next
+    end
+
+    return new_head
+end
