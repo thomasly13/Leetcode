@@ -3902,3 +3902,35 @@ def double_it(head)
 
     return new_head
 end
+
+# Relative Ranks
+def find_relative_ranks(score)
+    ordered = score.sort().reverse()
+    
+    placement = 3
+
+    ranks = {
+        0 => "Gold Medal",
+        1 => "Silver Medal",
+        2 => "Bronze Medal"
+    }
+
+    placements = {}
+
+    ordered.each_with_index do |num, index|
+        if ranks[index]
+            placements[num] = ranks[index]
+        else 
+            placement += 1
+            placements[num] = placement.to_s
+        end
+    end
+
+    return_array = []
+
+    score.each do |num|
+        return_array.push(placements[num])
+    end
+
+    return_array
+end
