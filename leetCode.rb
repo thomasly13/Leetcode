@@ -3934,3 +3934,30 @@ def find_relative_ranks(score)
 
     return_array
 end
+
+# Maximum Happiness
+def maximum_happiness_sum(happiness, k)
+    sorted = happiness.sort
+
+    happiness_change = 0
+
+    total_happiness = 0
+    
+    until k == 0
+        most_happy = sorted.pop
+
+        most_happy -= happiness_change
+
+        total_happiness += most_happy if most_happy > 0
+
+        happiness_change += 1
+        
+        k -= 1
+
+    end
+
+    total_happiness
+
+
+    
+end
