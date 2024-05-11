@@ -4036,3 +4036,44 @@ for i in a
 end
 m
 end
+
+
+# 3 Sum closest
+def three_sum_closest(nums, target)
+    nums.sort!
+    # Set default ans so we don't have to be concerned with nil.
+    ans = 9999999999
+    ans_abs = 9999999999
+    # j and k must be bigger than i.
+    i_index_stop = nums.size - 2
+    i = 0
+    while i < i_index_stop
+        # Skip repeating numbers. 
+        if !(i > 0 and nums[i] == nums[i-1])
+            j = i + 1
+            k = nums.size - 1
+            while j < k
+                total = nums[i] + nums[j] + nums[k]
+                if total == target
+                    return target
+                elsif total > target
+                    k -= 1
+                else
+                    j += 1
+                end
+
+                total_abs = (total - target).abs
+                
+                
+                if total_abs < ans_abs
+                    ans = total
+                    ans_abs = total_abs
+                end
+            end
+        end
+
+        i += 1
+    end
+
+    ans
+end
