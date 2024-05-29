@@ -4077,3 +4077,27 @@ def three_sum_closest(nums, target)
 
     ans
 end
+
+# Reverse Integer
+def reverse(x)
+
+    upper_limit = (2 ** 31) - 1
+    lower_limit = -2 ** 31
+
+    return 0 if x > upper_limit || x < lower_limit
+
+    flag = x > 0 ? true : false
+    stringified = x.to_s
+
+    reversed = stringified.reverse
+
+    reversed_integer = reversed.to_i
+    
+    return 0 if reversed_integer > upper_limit || reversed_integer < lower_limit
+
+    if flag
+        return reversed_integer
+    else 
+        return 0 - reversed_integer
+    end
+end
