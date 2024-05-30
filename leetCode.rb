@@ -4101,3 +4101,21 @@ def reverse(x)
         return 0 - reversed_integer
     end
 end
+
+# Counting triplets
+def count_triplets(arr)
+    result = 0
+    l = arr.size
+    (0..l - 2).each do |m|
+      a = nil
+      (m..l - 2).each do |i|
+        a.nil? ? a = arr[i] : a ^= arr[i]
+        b = nil
+        (i + 1..l - 1).each do |k|
+          b.nil? ? b = arr[k] : b ^= arr[k]
+          result += 1 if a ==  b
+        end
+      end
+    end
+    result
+  end
