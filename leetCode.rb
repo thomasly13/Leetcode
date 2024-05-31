@@ -4119,3 +4119,11 @@ def count_triplets(arr)
     end
     result
   end
+
+
+# Single Number 3
+def single_number(nums)
+    a = nums.reduce(:^)
+    b = nums.select { |n| n & a & -a > 0 }.reduce(:^)
+    [a ^ b, b]
+  end
