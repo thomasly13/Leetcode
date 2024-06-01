@@ -4127,3 +4127,13 @@ def single_number(nums)
     b = nums.select { |n| n & a & -a > 0 }.reduce(:^)
     [a ^ b, b]
   end
+
+
+# Score of string
+def score_of_string(s)
+    res = 0
+        for i in 0...s.length - 1
+            res += (s[i].ord - s[i + 1].ord).abs
+        end
+    res
+end
