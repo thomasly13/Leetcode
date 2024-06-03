@@ -4137,3 +4137,17 @@ def score_of_string(s)
         end
     res
 end
+
+#  Append Characters to String to Make Subsequence
+def append_characters(s, t)
+    tlength = t.length
+    return tlength if s.length == 0
+
+    index = 0
+    s.chars.each_with_index do |c, i|
+        if index < tlength && t[index] == c
+            index += 1
+        end
+    end
+    tlength - index
+end
