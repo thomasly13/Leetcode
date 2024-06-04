@@ -4151,3 +4151,30 @@ def append_characters(s, t)
     end
     tlength - index
 end
+
+# Longest Palindrome
+str_count = Array.new(52, 0)
+    
+s.each_char do |char|
+  if char >= 'a' && char <= 'z'
+    str_count[char.ord - 'a'.ord + 26] += 1
+  else
+    str_count[char.ord - 'A'.ord] += 1
+  end
+end
+
+ans = 0
+has_odd = false
+
+str_count.each do |count|
+  if count % 2 == 0
+    ans += count
+  else
+    ans += count - 1
+    has_odd = true
+  end
+end
+
+ans += 1 if has_odd  
+ans
+end
