@@ -4178,3 +4178,28 @@ end
 ans += 1 if has_odd  
 ans
 end
+
+# Common Chars
+def common_chars(words)
+    min_freq = Array.new(26, Float::INFINITY)
+    
+    words.each do |word|
+      freq = Array.new(26, 0)
+      word.each_char do |char|
+        freq[char.ord - 'a'.ord] += 1
+      end
+      (0...26).each do |i|
+        min_freq[i] = [min_freq[i], freq[i]].min
+      end
+    end
+    
+    result = []
+    (0...26).each do |i|
+      while min_freq[i] > 0
+        result << (i + 'a'.ord).chr
+        min_freq[i] -= 1
+      end
+    end
+    
+    result
+end
