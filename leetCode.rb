@@ -4229,3 +4229,24 @@ def is_n_straight_hand(hand, group_size)
 
     return true
 end
+
+
+# Continuous subarray sums
+def check_subarray_sum(nums, k)
+    hash_map = { 0 => 0 }
+    sum = 0
+
+    nums.each_with_index do |num, i|
+        sum += num
+
+        # If the remainder sum % k occurs for the first time
+        if !hash_map.key?(sum % k)
+            hash_map[sum % k] = i + 1
+        # If the subarray size is at least two
+        elsif hash_map[sum % k] < i
+            return true
+        end
+    end
+
+    false
+end
