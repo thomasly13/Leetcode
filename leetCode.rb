@@ -4273,3 +4273,12 @@ def compress(chars)
     
     walker
 end
+
+# Relative Sort Array
+require 'set'
+
+def relative_sort_array(arr1, arr2)
+    set, ord = Set[*arr2], arr2.each_with_index.each_with_object([]) {|(v, i), res| res[v] = i }
+    aa = arr1.partition {|v| set.include?(v) }
+    aa.first.sort! {|v1, v2| ord[v1] <=> ord[v2] } + aa.last.sort!
+end
