@@ -4282,3 +4282,9 @@ def relative_sort_array(arr1, arr2)
     aa = arr1.partition {|v| set.include?(v) }
     aa.first.sort! {|v1, v2| ord[v1] <=> ord[v2] } + aa.last.sort!
 end
+
+# Sorting
+def sort_colors(nums)
+    c0, c1 = nums.count(0), nums.count(1)  
+    nums.fill(0, 0, c0).fill(1, c0, c1).fill(2, c0 + c1)
+  end
