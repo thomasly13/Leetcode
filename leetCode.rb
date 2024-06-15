@@ -4306,3 +4306,53 @@ def bs_insert(a, item) =
       capital + (sorted_profits.pop || 0)
     end
   end
+
+# Valid Sodoku
+def is_valid_sudoku(board)
+    [
+        has_valid_rows?(board),
+        has_valid_cols?(board),
+        has_valid_grids?(board)
+    ].all?
+end
+
+def has_valid_rows?(board)
+    board.all? { |row| _is_valid_array?(row) }
+end
+
+def has_valid_cols?(board)
+    (0...9).each do |n|
+        col = []
+        board.each { |row| col << row[n] }
+        return false unless _is_valid_array?(col)
+    end
+
+    true
+end
+
+def has_valid_grids?(board)
+    [0,3,6].each do |n|
+        [0,3,6].each do |i|
+            grid = [
+                board[n][i], board[n][i+1], board[n][i+2],
+                board[n+1][i], board[n+1][i+1], board[n+1][i+2],
+                board[n+2][i], board[n+2][i+1], board[n+2][i+2]
+            ]
+
+            return false unless _is_valid_array?(grid)
+        end
+    end
+
+    true
+end
+
+def _is_valid_array?(arr)
+    ref = [0] * 10
+
+    arr.each do |sq|
+        next if sq == "."
+        return false if sq.to_i.zero? || sq.to_i > 9 || ref[sq.to_i] == 1
+        ref[sq.to_i] = 1
+    end
+
+    true
