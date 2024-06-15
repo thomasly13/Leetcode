@@ -4288,3 +4288,21 @@ def sort_colors(nums)
     c0, c1 = nums.count(0), nums.count(1)  
     nums.fill(0, 0, c0).fill(1, c0, c1).fill(2, c0 + c1)
   end
+
+
+# IPO
+def bs_insert(a, item) =
+    a.insert(a.bsearch_index { item <= _1 } || a.size, item)
+  
+  def find_maximized_capital(k, w, profits, costs)
+    tasks = costs.zip(profits).sort
+    sorted_profits = []
+  
+    k.times.reduce(w) do |capital, _|
+      while tasks[0] && capital >= tasks[0][0]
+        bs_insert(sorted_profits, tasks.shift[1])
+      end
+  
+      capital + (sorted_profits.pop || 0)
+    end
+  end
