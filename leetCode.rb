@@ -4430,3 +4430,36 @@ def max_profit_assignment(difficulty, profit, worker)
 
     profit
 end
+
+# MAgnetic Force between Balls
+def max_distance(position, m)
+    position.sort!
+  
+    can_fit = ->(target) do
+      count = 1
+  
+      current = position[0]
+      (1...position.length).each do |i|
+        if position[i] - current >= target
+          current = position[i]
+          count += 1
+        end
+      end
+  
+      count
+    end
+  
+    left = 1
+    right = position.last - position.first
+    while left <= right
+      middle = (left + right) / 2
+  
+      if can_fit.call(middle) >= m
+        left = middle + 1
+      else
+        right = middle - 1
+      end
+    end
+  
+    right
+  end
