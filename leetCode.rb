@@ -4463,3 +4463,33 @@ def max_distance(position, m)
   
     right
   end
+
+
+# Number of Nice Subarrays
+def numberOfSubarrays_v1(nums, k)
+    count = 0
+    n = nums.length
+    ans = 0
+    i = 0
+    for j in 0...n
+        if nums[j] % 2 == 1
+            count += 1
+        end
+        while count > k
+            if nums[i] % 2 == 1
+                count -= 1
+            end
+            i += 1
+        end
+        p = i
+        count1 = count
+        while count1 == k
+            ans += 1
+            if nums[p] % 2 == 1
+                count1 -= 1
+            end
+            p += 1
+        end
+    end
+    return ans
+end
