@@ -4509,3 +4509,15 @@ def simplify_path(path)
     end
     "/" + arr.join('/')
 end
+
+
+# Minimum arrow shots
+def find_min_arrow_shots(points)
+    points.sort_by!(&:last)
+    points.each_with_object([1, points.first.last]) {|(pb, pe), res|
+        if pb > res.last then
+            res[0] += 1
+            res[1] = pe
+        end
+    }.first
+end
