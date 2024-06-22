@@ -4493,3 +4493,19 @@ def numberOfSubarrays_v1(nums, k)
     end
     return ans
 end
+
+# Simplify Path
+def simplify_path(path)
+    arr = []
+    path.split('/').each do |ele|
+        next if ele.empty?
+        if ele == ".."
+            arr.pop() if arr.any?
+        elsif ele == "."
+            next
+        else
+            arr.push(ele)
+        end
+    end
+    "/" + arr.join('/')
+end
