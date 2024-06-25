@@ -4521,3 +4521,18 @@ def find_min_arrow_shots(points)
         end
     }.first
 end
+
+# Binary tree to greater sum tree
+def bst_to_gst(root)
+    @sum = 0
+    def reverse_order_traversal(root)
+        return nil if(root == nil)
+        
+        reverse_order_traversal(root.right)
+        @sum += root.val
+        root.val = @sum
+        reverse_order_traversal(root.left)
+        return root
+    end
+    reverse_order_traversal(root)
+end
