@@ -4536,3 +4536,29 @@ def bst_to_gst(root)
     end
     reverse_order_traversal(root)
 end
+
+#Balance of a Binary Search Tree
+def to_array(root)
+    return if root.nil?
+  
+    to_array(root.left)
+    @array << root
+    to_array(root.right)
+  end
+  
+  def balance_tree(array)
+    return nil if array.empty?
+  
+    mid = array.size / 2
+    root = array[mid]
+    root.left = balance_tree(array[0...mid])
+    root.right = balance_tree(array[mid+1..])
+  
+    root
+  end
+  
+  def balance_bst(root)
+    @array = []
+    to_array(root)
+    balance_tree(@array)
+  end
