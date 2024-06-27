@@ -4562,3 +4562,16 @@ def to_array(root)
     to_array(root)
     balance_tree(@array)
   end
+
+
+# Center of star Graph
+def find_center(edges)
+    adjacency = Hash.new { |h, k| h[k] = [] }
+  
+    edges.each do |a, b|
+      adjacency[a] << b
+      adjacency[b] << a
+    end
+  
+    adjacency.find { |k, v| (adjacency.keys - [k]).difference(v).none? }.first    
+  end
