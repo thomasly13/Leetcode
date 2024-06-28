@@ -4575,3 +4575,23 @@ def find_center(edges)
   
     adjacency.find { |k, v| (adjacency.keys - [k]).difference(v).none? }.first    
   end
+
+# Maximum Total Importance of Roads
+def maximum_importance(n, roads)
+    l = Array.new(n, 0)
+    roads.each do |road|
+        road.each do |city|
+            l[city] += 1
+        end
+    end
+    l.sort!.reverse!
+    ans = 0
+    j = 0
+    (n).downto(1) do |i|
+        if j < n
+            ans += l[j] * i
+            j += 1
+        end
+    end
+    return ans
+end
