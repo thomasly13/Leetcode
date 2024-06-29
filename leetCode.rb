@@ -4595,3 +4595,39 @@ def maximum_importance(n, roads)
     end
     return ans
 end
+
+# Ancestors of a Node in a DIrected Acyclic Graph
+def get_ancestors(n, edges)
+    ancestors = Array.new(n) {Set.new}
+    children = Array.new(n) {[]}
+    in_degree = Array.new(n, 0)
+  
+    edges.each {|from, to|
+      in_degree[to] += 1
+      children[from] << to
+    }
+  
+    queue = []
+    in_degree.each_with_index{|degree, node|
+      queue << node if degree.zero?
+    }
+  
+    order_of_nodes = []
+    until queue.empty?
+      node = queue.shift
+      order_of_nodes << node
+  
+      children[node].each {|child|
+        in_degree[child] -= 1
+        queue << child if in_degree[child].zero?
+      }
+    end
+  
+    order_of_nodes.each {|node|
+      children[node].each {|child|
+        ancestors[child] += [node] + ancestors[node].to_a
+      }
+    }
+  
+    ancestors.map{_1.to_a.sort}
+  end
