@@ -4639,3 +4639,13 @@ def largestPerimeter(self, nums: List[int]) -> int:
         if nums[i] < nums[i + 1] + nums[i + 2]:
             return nums[i] + nums[i + 1] + nums[i + 2]
     return 0
+
+# Minimum Difference Between Largest and Smallest Value in Three Moves 
+def minDifference(self, nums: List[int]) -> int:
+    if len(nums) <= 4:
+        return 0
+    nums.sort()
+    ans = nums[-1] - nums[0]
+    for i in range(4):
+        ans = min(ans, nums[-(4 - i)] - nums[i])
+    return ans
