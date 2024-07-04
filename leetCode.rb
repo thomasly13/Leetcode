@@ -4649,3 +4649,22 @@ def minDifference(self, nums: List[int]) -> int:
     for i in range(4):
         ans = min(ans, nums[-(4 - i)] - nums[i])
     return ans
+
+# Merge Nodes in Between Zeros
+def merge_nodes(head)
+    f = head
+    s = head
+  
+    loop do
+      f = f.next
+      if f.val == 0
+        if f.next.nil?
+          s.next = nil
+          return head
+        end
+        s = s.next = f
+      else
+        s.val += f.val
+      end
+    end
+  end
