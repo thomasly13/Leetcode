@@ -4668,3 +4668,25 @@ def merge_nodes(head)
       end
     end
   end
+
+# Average Wait Time
+def average_waiting_time(customers)
+    next_cook_time = 0
+    total_wait_time = 0
+
+    customers.each do | customer |
+        arrival_time = customer[0]
+        cook_time = customer[1]
+
+        if next_cook_time <= arrival_time
+            total_wait_time = total_wait_time + (cook_time)
+            next_cook_time = arrival_time + cook_time
+
+        elsif next_cook_time > arrival_time
+            # When did they arrive and how far away from the wait time is it? Subtract this number from the cook time and average
+            total_wait_time = total_wait_time + ((next_cook_time - arrival_time) + cook_time)
+            next_cook_time = next_cook_time + cook_time
+        end
+    end
+    (total_wait_time.to_f / customers.length).to_f
+end
