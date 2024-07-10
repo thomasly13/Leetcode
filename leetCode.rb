@@ -4690,3 +4690,19 @@ def average_waiting_time(customers)
     end
     (total_wait_time.to_f / customers.length).to_f
 end
+
+
+# Crawler Log Folder
+def min_operations(logs)
+    stack = []
+  
+    logs.each do |command|
+      if command == '../'
+        stack.pop
+      elsif command != './'
+        stack.push(command)
+      end
+    end
+  
+    stack.length
+  end
