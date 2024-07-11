@@ -4706,3 +4706,22 @@ def min_operations(logs)
   
     stack.length
   end
+
+# Reverse Parenthesis
+def reverse_parentheses(s)
+    stack = []
+    word = ''
+  
+    s.each_char {|c|
+      if c == '('
+        stack << word
+        word = ''
+      elsif c == ')'
+        word = stack.pop + word.reverse
+      else
+        word += c
+      end
+    }
+  
+    word
+  end
