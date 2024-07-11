@@ -131,3 +131,27 @@ loop(array)
             elif log != './':
                 step += 1
         return step
+
+# Reverse substrings between each pair of parenthesis 
+    def reverseParentheses(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        stack = []
+        
+        for char in s:
+            if char == ')':
+                # Pop from the stack until encountering '('
+                temp = []
+                while stack and stack[-1] != '(':
+                    temp.append(stack.pop())
+                stack.pop()  # Remove the '(' from the stack
+                # Reverse the characters and push them back onto the stack
+                stack.extend(temp)
+            else:
+                # Push the character onto the stack
+                stack.append(char)
+        
+        # Join the stack to form the final result
+        return ''.join(stack)
