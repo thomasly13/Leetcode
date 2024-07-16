@@ -4725,3 +4725,42 @@ def reverse_parentheses(s)
   
     word
   end
+
+# Directions from a Binary Tree Node to Another
+def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
+    graph = collections.defaultdict(list)
+    # key: [(node,direction),()]
+    
+    startNode = None
+    def traverse(root,parent):
+        nonlocal startNode
+        if not root:
+            return
+        
+        if root.val == startValue:
+            startNode = root
+            
+        graph[root].append((parent,"U"))
+        if root.left:    
+            graph[root].append((root.left,"L"))
+            traverse(root.left,root)
+        if root.right:
+            graph[root].append((root.right,"R"))
+            traverse(root.right,root)
+        
+    traverse(root,None)
+    
+    
+    stack = [(startNode,"")]
+    seen = set()
+    seen.add(startNode)
+    
+    while stack:
+        cur,path = stack.pop()
+        if cur.val == destValue:
+            return path
+        for nxt,direction in graph[cur]:
+            if nxt not in seen:
+                seen.add(nxt)
+                new_path = path + direction
+                stack.append((nxt,new_path))
