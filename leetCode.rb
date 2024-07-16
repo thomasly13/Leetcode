@@ -4727,40 +4727,25 @@ def reverse_parentheses(s)
   end
 
 # Directions from a Binary Tree Node to Another
-def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
-    graph = collections.defaultdict(list)
-    # key: [(node,direction),()]
-    
-    startNode = None
-    def traverse(root,parent):
-        nonlocal startNode
-        if not root:
-            return
-        
-        if root.val == startValue:
-            startNode = root
-            
-        graph[root].append((parent,"U"))
-        if root.left:    
-            graph[root].append((root.left,"L"))
-            traverse(root.left,root)
-        if root.right:
-            graph[root].append((root.right,"R"))
-            traverse(root.right,root)
-        
-    traverse(root,None)
-    
-    
-    stack = [(startNode,"")]
-    seen = set()
-    seen.add(startNode)
-    
-    while stack:
-        cur,path = stack.pop()
-        if cur.val == destValue:
-            return path
-        for nxt,direction in graph[cur]:
-            if nxt not in seen:
-                seen.add(nxt)
-                new_path = path + direction
-                stack.append((nxt,new_path))
+def dfs(start, target)
+    path = ""
+    stack = [[start, path]]
+    while(!stack.empty?)
+        cur_node, cur_path = stack.pop
+        return cur_path if cur_node.val == target
+        stack.push([cur_node.left, cur_path + 'L']) if cur_node && cur_node.left
+        stack.push([cur_node.right, cur_path + 'R']) if cur_node && cur_node.right
+    end
+    return path
+end
+
+
+def get_directions(root, start_value, dest_value)
+    start_path = dfs(root, start_value)
+    dest_path = dfs(root, dest_value)
+    i = 0
+    while(start_path[i] == dest_path[i])
+        i += 1
+    end
+    "U"*(start_path.length-i) + dest_path[i..-1]
+end

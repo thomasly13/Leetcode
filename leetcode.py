@@ -155,3 +155,28 @@ loop(array)
         
         # Join the stack to form the final result
         return ''.join(stack)
+
+# Directions from a Binary Tree Node to Another
+def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
+    graph = collections.defaultdict(list)
+    # key: [(node,direction),()]
+    
+    startNode = None
+    def traverse(root,parent):
+        nonlocal startNode
+        if not root:
+            return
+        
+        if root.val == startValue:
+            startNode = root
+            
+        graph[root].append((parent,"U"))
+        if root.left:    
+            graph[root].append((root.left,"L"))
+            traverse(root.left,root)
+        if root.right:
+            graph[root].append((root.right,"R"))
+            traverse(root.right,root)
+        
+    traverse(root,None)
+    
