@@ -4751,3 +4751,40 @@ def get_directions(root, start_value, dest_value)
 end
 
 # Delete Nodes and Return Forest
+class TreeNode
+    attr_accessor :parent
+  end
+  
+  def del_nodes(root, to_delete)
+    find_node_and_resolve_parent = lambda do |current, target_val|
+      queue = [current]
+      until queue.empty?
+        current = queue.shift
+  
+        return current if current.val == target_val
+  
+        if current.left
+          current.left.parent = current
+          queue.append(current.left)
+        end
+        if current.right
+          current.right.parent = current
+          queue.append(current.right)
+        end
+      end
+    end
+  
+    dummy = TreeNode.new(nil, root)
+    nodes_to_delete = to_delete.map { find_node_and_resolve_parent.call(dummy, _1) }
+  
+    results = []
+    nodes_to_delete.each do |node|
+      results << node.left if node.left && !nodes_to_delete.include?(node.left)
+      results << node.right if node.right && !nodes_to_delete.include?(node.right)
+  
+      node.parent.left = nil if node.parent.left == node
+      node.parent.right = nil if node.parent.right == node
+    end
+  
+    ([dummy.left] + results).compact
+  end
