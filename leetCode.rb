@@ -4749,3 +4749,5 @@ def get_directions(root, start_value, dest_value)
     end
     "U"*(start_path.length-i) + dest_path[i..-1]
 end
+
+# Delete Nodes and Return Forest
