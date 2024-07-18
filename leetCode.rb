@@ -4788,3 +4788,25 @@ class TreeNode
   
     ([dummy.left] + results).compact
   end
+
+# Number of good leaf nodes pairs
+def count_pairs(root, distance)
+    ans = 0
+    dfs = lambda do |node|
+      return [] unless node
+      return [1] if node.left.nil? && node.right.nil?
+  
+      left_distance = dfs.call(node.left)
+      right_distance = dfs.call(node.right)
+  
+      left_distance.each do |l|
+        right_distance.each do |r|
+          ans += 1 if l + r <= distance
+        end
+      end
+  
+      (left_distance + right_distance).map { |d| d + 1 }
+    end
+    dfs.call(root)
+    ans
+  end
