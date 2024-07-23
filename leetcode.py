@@ -249,3 +249,9 @@ def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeN
 
         dfs(root)
         return self.totalPairs
+
+
+#Sort array by frequencies
+    def frequencySort(self, nums):
+        freq = Counter(nums)
+        return sorted(nums, key=lambda x : (freq[x], -x))
