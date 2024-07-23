@@ -4812,3 +4812,28 @@ def count_pairs(root, distance)
   end
 
 # Sort array by increasing frequency 
+def frequency_sort(nums)
+    # Step 1: Create a frequency hash to store the count of each number
+    freq = Hash.new(0)
+    nums.each { |num| freq[num] += 1 }
+
+    # Step 2: Create a hash to store numbers grouped by their frequency
+    arrange = Hash.new { |hash, key| hash[key] = [] }
+
+    # Step 3: Populate the arrange hash
+    freq.each do |num, count|
+        arrange[count] << num
+    end
+
+    # Step 4: Clear the nums array to prepare for the sorted result
+    nums.clear
+
+    # Step 5: Rebuild the nums array based on the frequencies
+    arrange.keys.sort.each do |count|
+        arrange[count].sort.reverse.each do |num|
+            count.times { nums << num }
+        end
+    end
+
+    nums
+end
