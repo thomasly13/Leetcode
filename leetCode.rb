@@ -4874,3 +4874,32 @@ end
 def swap(l, r)
     @nums[l], @nums[r] = @nums[r], @nums[l]
 end
+
+# Count and Say
+def count_and_say(n)
+    return "1" if n == 1  # Base case
+    ans, temp = "", "1"
+    
+    for i in 2..n
+      cnt = 0
+      prev = temp[0]
+      
+      temp.chars.each_with_index do |char, j|
+        if prev == char
+          cnt += 1  # brute force
+        else
+          ans += cnt.to_s  # adding count to the end
+          ans += temp[j-1]
+          prev = char
+          cnt = 1
+        end
+      end
+      
+      ans += cnt.to_s
+      ans += temp[-1]
+      temp = ans  # assigning ans to temp and making ans = ""
+      ans = ""  # so that we can iterate over temp again!
+    end
+    
+    temp
+  end
