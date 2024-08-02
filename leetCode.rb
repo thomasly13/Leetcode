@@ -4903,3 +4903,17 @@ def count_and_say(n)
     
     temp
   end
+
+  # Minimum swaps to group all 1's together
+  def min_swaps(nums)
+    count_ones = nums.count(1)
+    count_zeros = nums[0...count_ones].count(0)
+    ans = count_zeros
+    arr = nums + nums[0...count_ones]
+    (1...arr.length - count_ones).each do |i|
+      count_zeros -= 1 if arr[i - 1] == 0
+      count_zeros += 1 if arr[i + count_ones - 1] == 0
+      ans = [ans, count_zeros].min
+    end
+    ans
+  end
