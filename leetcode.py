@@ -308,4 +308,15 @@ def countAndSay(self, n):
                 max_height = max(max_height, books[j-1][1])
                 dp[i] = min(dp[i], dp[j-1] + max_height)
         
-        return dp[n
+        return dp[n]
+
+# Minimum Swaps to Group all 1's Together
+    def minSwaps(self, nums: List[int]) -> int:
+        k = nums.count(1)
+        mx = cnt = sum(nums[:k])
+        n = len(nums)
+        for i in range(k, n + k):
+            cnt += nums[i % n]
+            cnt -= nums[(i - k + n) % n]
+            mx = max(mx, cnt)
+        return k - mx
