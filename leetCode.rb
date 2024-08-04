@@ -4917,3 +4917,13 @@ def count_and_say(n)
     end
     ans
   end
+
+  # Single Number 3
+  def single_number(nums)
+    hash = Hash.new(0)
+
+    nums.each do |num|
+        hash[num] += 1
+    end
+    hash.select{ |key, value| value == 1 }.keys
+end
