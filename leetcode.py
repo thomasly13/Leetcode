@@ -332,3 +332,14 @@ def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
             l.append(cum)
     l.sort()
     return sum(l[left-1:right])%(10**9+7)
+
+# Single Number 3
+    def singleNumber(self, a: List[int]) -> List[int]:
+        # total xor-sum
+        x = reduce(xor, a)
+        # first different bit for two numbers
+        d = -x&x
+        # one number
+        y = reduce(xor, (v for v in a if d&v))
+        # another number will be x^y
+        return x^y, y
