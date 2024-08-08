@@ -4971,3 +4971,25 @@ LESS_THAN_20 = [
     end
   end
 end
+
+# Spiral Matrix 3
+def spiral_matrix_iii(rows, cols, r_start, c_start)
+    result = []
+    directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+    dir_index = 0
+    step_count = 1
+    r, c = r_start, c_start
+    result << [r, c]
+    
+    while result.size < rows * cols
+        step_count.times do
+            r += directions[dir_index][0]
+            c += directions[dir_index][1]
+            result << [r, c] if r >= 0 && r < rows && c >= 0 && c < cols
+        end
+        dir_index = (dir_index + 1) % 4
+        step_count += 1 if dir_index % 2 == 0
+    end
+    
+    result
+end
