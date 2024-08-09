@@ -4993,3 +4993,44 @@ def spiral_matrix_iii(rows, cols, r_start, c_start)
     
     result
 end
+
+
+# Magic Square
+def num_magic_squares_inside(grid)
+    def is_magic_square(grid, row, col)
+        values = []
+        seen = Array.new(10, false)
+
+        (0...3).each do |i|
+            (0...3).each do |j|
+                val = grid[row + i][col + j]
+                return false if val < 1 || val > 9 || seen[val]
+                seen[val] = true
+                values.push(val)
+            end
+        end
+
+        sum = values[0] + values[1] + values[2]
+        (0...3).each do |i|
+            return false if values[i * 3] + values[i * 3 + 1] + values[i * 3 + 2] != sum
+            return false if values[i] + values[i + 3] + values[i + 6] != sum
+        end
+
+        return false if values[0] + values[4] + values[8] != sum
+        return false if values[2] + values[4] + values[6] != sum
+
+        true
+    end
+
+    count = 0
+    rows = grid.length
+    cols = grid[0].length
+
+    (0..rows - 3).each do |i|
+        (0..cols - 3).each do |j|
+            count += 1 if is_magic_square(grid, i, j)
+        end
+    end
+
+    count
+end
