@@ -5034,3 +5034,32 @@ def num_magic_squares_inside(grid)
 
     count
 end
+
+# Smallest pair distance
+def smallest_distance_pair(nums, k)
+    nums.sort!
+    n = nums.size
+  
+    count_pairs = lambda do |x|
+      cnt = 0
+      r = 1
+      n.times do |l|
+        r += 1 while r < n && nums[r] - nums[l] <= x
+        cnt += r - l - 1
+      end
+      cnt
+    end
+  
+    ok = nums[-1] - nums[0]
+    ng = -1
+    while ok - ng > 1
+      mid = (ok + ng) / 2
+      count = count_pairs.call(mid)
+      if count >= k
+        ok = mid
+      else
+        ng = mid
+      end
+    end
+    ok
+  end
