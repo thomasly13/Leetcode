@@ -5063,3 +5063,17 @@ def smallest_distance_pair(nums, k)
     end
     ok
   end
+
+# 2 keys beyboard
+def min_steps(n)
+    steps = 0
+    i = 2
+    while i <= n
+      while n % i == 0
+        steps += i
+        n /= i
+      end
+      i += 1
+    end
+    steps
+  end
