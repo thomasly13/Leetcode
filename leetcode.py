@@ -470,3 +470,15 @@ def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
                 high = mid
 
         return low
+
+
+# 2 keys keyboard
+    def minSteps(self, n: int) -> int:
+        steps = 0
+        i = 2
+        while i <= n:
+            while n % i == 0:
+                steps += i
+                n //= i
+            i += 1
+        return steps
