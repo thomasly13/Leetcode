@@ -5077,3 +5077,32 @@ def min_steps(n)
     end
     steps
   end
+
+
+# 2 stone game
+def stone_game_ii(piles)
+    @memo = {}
+    @piles = piles
+    score = score(0,1)
+    sum = piles.sum - score
+    score + sum / 2
+end
+
+def score(idx,max)
+    return 0 if idx >= @piles.length
+    return @memo[[idx,max]] if @memo[[idx,max]]
+    orig_max = max
+
+    max_score = -Float::INFINITY
+    (1..2*max).each do |i|
+        next if idx + i > @piles.length
+        
+        curr_score = @piles[idx...idx+i].sum - score(idx+i,[i,max].max)
+        if curr_score > max_score
+            max_score = curr_score
+            max = i if i > max
+        end
+    end
+
+    @memo[[idx,orig_max]] = max_score
+end
