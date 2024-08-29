@@ -537,3 +537,52 @@ def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
             else:
                 if abs(int(n) - p2)  >= abs(int(n) - p3): return str(p3)
                 else: return str(p2)
+
+
+
+# Most stones removed with same row or column
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [1] * n
+
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        rootX = self.find(x)
+        rootY = self.find(y)
+
+        if rootX != rootY:
+            if self.rank[rootX] > self.rank[rootY]:
+                self.parent[rootY] = rootX
+            elif self.rank[rootX] < self.rank[rootY]:
+                self.parent[rootX] = rootY
+            else:
+                self.parent[rootY] = rootX
+                self.rank[rootX] += 1
+
+class Solution:
+    def removeStones(self, stones):
+        n = len(stones)
+        uf = UnionFind(n)
+
+        rowMap = {}
+        colMap = {}
+
+        for i, (row, col) in enumerate(stones):
+            if row in rowMap:
+                uf.union(i, rowMap[row])
+            else:
+                rowMap[row] = i
+
+            if col in colMap:
+                uf.union(i, colMap[col])
+            else:
+                colMap[col] = i
+
+        uniqueComponents = {uf.find(i) for i in range(n)}
+
+        return n - len(uniqueComponents)
