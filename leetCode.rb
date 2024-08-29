@@ -5155,3 +5155,58 @@ def increment(str, i)
     end
     str[i] = (str[i].to_i + 1).to_s
 end
+
+# Most Stones Removed with the Same Row or Column
+class UnionFind
+    def initialize(n)
+      @parent = Array.new(n) { |i| i }
+      @rank = Array.new(n, 1)
+    end
+  
+    def find(x)
+      @parent[x] = find(@parent[x]) if @parent[x] != x
+      @parent[x]
+    end
+  
+    def union(x, y)
+      root_x = find(x)
+      root_y = find(y)
+  
+      if root_x != root_y
+        if @rank[root_x] > @rank[root_y]
+          @parent[root_y] = root_x
+        elsif @rank[root_x] < @rank[root_y]
+          @parent[root_x] = root_y
+        else
+          @parent[root_y] = root_x
+          @rank[root_x] += 1
+        end
+      end
+    end
+  end
+  
+  def remove_stones(stones)
+    n = stones.length
+    uf = UnionFind.new(n)
+  
+    row_map = {}
+    col_map = {}
+  
+    stones.each_with_index do |(row, col), i|
+      if row_map.key?(row)
+        uf.union(i, row_map[row])
+      else
+        row_map[row] = i
+      end
+  
+      if col_map.key?(col)
+        uf.union(i, col_map[col])
+      else
+        col_map[col] = i
+      end
+    end
+  
+    unique_components = (0...n).map { |i| uf.find(i) }.uniq.size
+  
+    n - unique_components
+  end
