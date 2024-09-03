@@ -5210,3 +5210,40 @@ class UnionFind
   
     n - unique_components
   end
+
+# Sum of digits of string after convert
+def get_lucky(s, k)
+    # Map alphabet to int's.
+    val = 1
+    hash = {}
+    ("a".."z").each do |char|
+        hash[char] = val
+        val += 1
+    end
+
+    # Convert s to int but int's are
+    # in string form.
+    sum = ""
+    i = 0
+    while i < s.size
+        sum += hash[s[i]].to_s
+        i += 1
+    end
+    
+    # Transform k times.
+    sum = sum.to_s 
+    while k > 0
+        i = 0
+        
+        new_sum = 0
+        while i < sum.size
+            new_sum += sum[i].to_i
+            i += 1
+        end
+
+        sum = new_sum.to_s
+        k -= 1
+    end
+    
+    sum.to_i
+end
