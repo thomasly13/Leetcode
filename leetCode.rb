@@ -5247,3 +5247,15 @@ def get_lucky(s, k)
     
     sum.to_i
 end
+
+# Find Missing Observations
+def missing_rolls(rolls, mean, n)
+    m = rolls.length
+    total_sum = mean * (m + n)
+    missing_sum = total_sum - rolls.sum
+    return [] if missing_sum < n || missing_sum > 6 * n
+  
+    result = Array.new(n, missing_sum / n)
+    (missing_sum % n).times { result[_1] += 1 }
+    result
+  end
