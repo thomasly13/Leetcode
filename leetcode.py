@@ -622,3 +622,24 @@ class Solution:
             result[i] += 1
         
         return result
+
+
+    # Delete Nodes of Linked list in array
+    class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+    class Solution:
+        def modifiedList(self, nums, head):
+            num_set = set(nums)
+            dummy = ListNode(-1)
+            node = dummy
+            
+            while head:
+                if head.val not in num_set:
+                    node.next = head
+                    node = node.next
+                head = head.next
+            node.next = None
+            return dummy.next
