@@ -5259,3 +5259,28 @@ def missing_rolls(rolls, mean, n)
     (missing_sum % n).times { result[_1] += 1 }
     result
   end
+
+# Delete Nodes from Linked List present in Array
+class ListNode
+    attr_accessor :val, :next
+    def initialize(val = 0, _next = nil)
+        @val = val
+        @next = _next
+    end
+end
+
+def modified_list(nums, head)
+    num_set = nums.to_set
+    dummy = ListNode.new(-1)
+    node = dummy
+
+    while head
+        unless num_set.include?(head.val)
+            node.next = head
+            node = node.next
+        end
+        head = head.next
+    end
+    node.next = nil
+    dummy.next
+end
