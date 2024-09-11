@@ -5284,3 +5284,9 @@ def modified_list(nums, head)
     node.next = nil
     dummy.next
 end
+
+# Minimum bip flips to convert number
+def min_bit_flips(start, goal)
+    xor = start ^ goal
+    xor.to_s(2).count('1')
+  end
