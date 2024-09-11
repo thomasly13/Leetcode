@@ -643,3 +643,8 @@ class Solution:
                 head = head.next
             node.next = None
             return dummy.next
+
+    # Minimum bit flips to convert number
+        def minBitFlips(self, start: int, goal: int) -> int:
+        xor = start ^ goal
+        return bin(xor).count('1')
