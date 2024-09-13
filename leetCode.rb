@@ -5290,3 +5290,24 @@ def min_bit_flips(start, goal)
     xor = start ^ goal
     xor.to_s(2).count('1')
   end
+
+
+# XOR Queries of a subarray
+def xor_queries(arr, queries)
+    n = arr.length
+    prefix_xor = Array.new(n + 1, 0)
+    
+    # Compute the prefix XOR array
+    (0...n).each do |i|
+      prefix_xor[i + 1] = prefix_xor[i] ^ arr[i]
+    end
+    
+    result = []
+    
+    # Process each query
+    queries.each do |left, right|
+      result << (prefix_xor[right + 1] ^ prefix_xor[left])
+    end
+    
+    return result
+  end
