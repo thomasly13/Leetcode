@@ -648,3 +648,21 @@ class Solution:
         def minBitFlips(self, start: int, goal: int) -> int:
         xor = start ^ goal
         return bin(xor).count('1')
+
+
+    # XOR queries of a subarray
+    def xorQueries(self, arr: List[int], queries: List[List[int]]) -> List[int]:
+        n = len(arr)
+        prefixXor = [0] * (n + 1)
+        
+        # Compute the prefix XOR array
+        for i in range(n):
+            prefixXor[i + 1] = prefixXor[i] ^ arr[i]
+        
+        result = []
+        
+        # Process each query
+        for left, right in queries:
+            result.append(prefixXor[right + 1] ^ prefixXor[left])
+        
+        return result
