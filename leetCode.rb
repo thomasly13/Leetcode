@@ -5311,3 +5311,8 @@ def xor_queries(arr, queries)
     
     return result
   end
+
+  # Longest Sub Array with amximum Bitsize AND
+  def longest_subarray(nums)
+    nums.chunk(&:itself).map(&:last).max.size
+  end

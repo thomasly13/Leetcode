@@ -666,3 +666,5 @@ class Solution:
             result.append(prefixXor[right + 1] ^ prefixXor[left])
         
         return result
+
+        
