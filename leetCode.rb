@@ -5316,3 +5316,39 @@ def xor_queries(arr, queries)
   def longest_subarray(nums)
     nums.chunk(&:itself).map(&:last).max.size
   end
+
+  # Different Ways to Add parenthesis
+  def initialize
+    @memo = {}
+  end
+
+  def diff_ways_to_compute(expression)
+    return @memo[expression] if @memo.key?(expression)
+
+    result = []
+    
+    expression.chars.each_with_index do |c, i|
+      if ['+', '-', '*'].include?(c)
+        left_results = diff_ways_to_compute(expression[0...i])
+        right_results = diff_ways_to_compute(expression[(i + 1)..-1])
+        
+        left_results.each do |left|
+          right_results.each do |right|
+            case c
+            when '+'
+              result << left + right
+            when '-'
+              result << left - right
+            when '*'
+              result << left * right
+            end
+          end
+        end
+      end
+    end
+
+    result = [expression.to_i] if result.empty?
+
+    @memo[expression] = result
+    result
+  end
