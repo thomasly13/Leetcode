@@ -685,3 +685,33 @@ class Solution:
                 i += 1
         
         return maxi
+
+    # Different ways to add parenthesis
+        def __init__(self):
+        self.memo = {}
+
+    def diffWaysToCompute(self, expression: str) -> list:
+        if expression in self.memo:
+            return self.memo[expression]
+
+        result = []
+        
+        for i, c in enumerate(expression):
+            if c in "+-*":
+                leftResults = self.diffWaysToCompute(expression[:i])
+                rightResults = self.diffWaysToCompute(expression[i + 1:])
+
+                for left in leftResults:
+                    for right in rightResults:
+                        if c == '+':
+                            result.append(left + right)
+                        elif c == '-':
+                            result.append(left - right)
+                        elif c == '*':
+                            result.append(left * right)
+
+        if not result:
+            result.append(int(expression))
+
+        self.memo[expression] = result
+        return result
