@@ -5352,3 +5352,30 @@ def xor_queries(arr, queries)
     @memo[expression] = result
     result
   end
+
+  # Shortest Palindrome
+  def shortest_palindrome(s)
+    count = kmp(s.reverse, s)
+    s[count..-1].reverse + s
+  end
+  
+  def kmp(txt, patt)
+    new_string = patt + '#' + txt
+    pi = Array.new(new_string.length, 0)
+    i = 1
+    k = 0
+    while i < new_string.length
+      if new_string[i] == new_string[k]
+        k += 1
+        pi[i] = k
+        i += 1
+      else
+        if k > 0
+          k = pi[k - 1]
+        else
+          i += 1
+        end
+      end
+    end
+    pi[-1]
+  end
