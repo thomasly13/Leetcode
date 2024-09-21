@@ -5379,3 +5379,26 @@ def xor_queries(arr, queries)
     end
     pi[-1]
   end
+
+  # Lexicographical Numbers
+  def lexical_order(n)
+    result = []
+    
+    (1..9).each do |i|
+      dfs(i, n, result)
+    end
+    
+    result
+  end
+  
+  def dfs(current, n, result)
+    return if current > n
+    
+    result << current
+    
+    (0..9).each do |i|
+      next_num = current * 10 + i
+      return if next_num > n
+      dfs(next_num, n, result)
+    end
+  end
