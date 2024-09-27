@@ -5402,3 +5402,66 @@ def xor_queries(arr, queries)
       dfs(next_num, n, result)
     end
   end
+
+  # My calendar 2
+  class MyCalendarTwo
+    def initialize
+      @single_booked = []
+      @double_booked = []
+    end
+  
+    def intersection(intervals, s, e)
+      l = intervals.bsearch_index { |x| x >= s } || intervals.size
+      r = intervals.bsearch_index { |x| x > e } || intervals.size
+  
+      intersection = []
+  
+      if l.odd?
+        if intervals[l] != s
+          intersection << s
+        else
+          l += 1
+        end
+      end
+  
+      intersection.concat(intervals[l...r])
+  
+      if r.odd?
+        if intervals[r - 1] != e
+          intersection << e
+        else
+          intersection.pop
+        end
+      end
+  
+      intersection
+    end
+  
+    def add(intervals, s, e)
+      l = intervals.bsearch_index { |x| x >= s } || intervals.size
+      r = intervals.bsearch_index { |x| x > e } || intervals.size
+  
+      new_intervals = []
+      new_intervals << s if l.even?
+      new_intervals << e if r.even?
+  
+      intervals[l...r] = new_intervals
+    end
+  
+    def book(start, end_)
+      return false unless intersection(@double_booked, start, end_).empty?
+  
+      intersection = intersection(@single_booked, start, end_)
+  
+      unless intersection.empty?
+        (0...intersection.size / 2).each do |i|
+          i1 = intersection[2 * i]
+          i2 = intersection[2 * i + 1]
+          add(@double_booked, i1, i2)
+        end
+      end
+  
+      add(@single_booked, start, end_)
+      true
+    end
+  end
