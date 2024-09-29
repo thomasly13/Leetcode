@@ -5465,3 +5465,74 @@ def xor_queries(arr, queries)
       true
     end
   end
+
+
+  # All one data structure
+  class AllOne
+    def initialize()
+        @hash = Hash.new(0)
+        @min = ''
+        @max = ''
+    end
+
+
+=begin
+    :type key: String
+    :rtype: Void
+=end
+    def inc(key)
+        @max = key if @hash[key] == @hash[@max]
+        @hash[key] += 1
+        if @hash[key] == 1
+            @min = key
+            return
+        end
+        if @min == key || @min == ''
+            min = ''
+            val = Float::INFINITY
+            @hash.each { |k,v| min,val = k,v if v < val }
+            @min = min
+        end
+    end
+
+
+=begin
+    :type key: String
+    :rtype: Void
+=end
+    def dec(key)
+       @min = key if @hash[key] == @hash[@min] && @hash[key] > 1
+       @hash[key] -= 1
+       @hash.delete(key) if @hash[key] == 0
+       if @min == key
+            min = ''
+            val = Float::INFINITY
+            @hash.each { |k,v| min,val = k,v if v < val }
+            @min = min
+       end
+       if @max == key || @max == ''
+            max = ''
+            val = 0
+            @hash.each { |k,v| max,val = k,v if v > val }
+            @max = max
+        end
+    end
+
+
+=begin
+    :rtype: String
+=end
+    def get_max_key()
+        @max
+    end
+
+
+=begin
+    :rtype: String
+=end
+    def get_min_key()
+        @min
+    end
+
+
+end

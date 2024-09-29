@@ -830,3 +830,4 @@ class Solution:
         self.add(self.single_booked, start, end)
 
         return True
+        
