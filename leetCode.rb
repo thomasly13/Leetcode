@@ -5536,3 +5536,19 @@ def xor_queries(arr, queries)
 
 
 end
+# Make Sum Divisible by P
+def min_subarray(nums, p)
+    return 0 if nums.sum % p == 0
+  
+    target = nums.sum % p
+    prefix_sum = 0
+    prefix_sums_hash = { 0 => -1 }
+    min_length = nums.size
+    nums.each_with_index do |num, i|
+      prefix_sum = (prefix_sum + num) % p
+      need_sum = (prefix_sum - target) % p
+      min_length = [min_length, i - prefix_sums_hash[need_sum]].min if prefix_sums_hash[need_sum]
+      prefix_sums_hash[prefix_sum] = i
+    end
+    min_length == nums.size ? -1 : min_length
+  end
