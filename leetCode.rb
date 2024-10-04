@@ -5552,3 +5552,34 @@ def min_subarray(nums, p)
     end
     min_length == nums.size ? -1 : min_length
   end
+
+
+  # Divide Players in Teams of Equal Skill
+    def divide_players(skill)
+        sorted_array = skill.sort
+
+        pointer1 = 0
+
+        pointer2 = sorted_array.length - 1
+
+        comparer = sorted_array[pointer1] + sorted_array[pointer2]
+
+        totalChemistry = 0
+
+        while ( pointer1 < pointer2)
+
+            number1 = sorted_array[pointer1]
+
+            number2 = sorted_array[pointer2]
+
+            if(number1 + number2 == comparer) 
+                totalChemistry += (number1 * number2)
+                pointer1 += 1
+                pointer2 -= 1
+            else 
+                return -1
+            end
+        end
+        
+        return totalChemistry
+    end

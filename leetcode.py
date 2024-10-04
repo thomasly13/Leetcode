@@ -888,3 +888,6 @@ class Solution:
             prefixMod[currentMod] = i
 
         return minLength if minLength < len(nums) else -1
+
+
+        
