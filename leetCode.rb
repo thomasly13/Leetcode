@@ -5619,3 +5619,34 @@ def min_subarray(nums, p)
         # Return the minimum number of additions needed to make the string valid
         ans
       end
+
+
+# Number of the smallest unoccupied chair
+class Array
+    include Comparable
+
+    def add_sorted(v) = insert(bsearch_index {|w| w >= v} || -1, v)
+end
+
+class QnCnt
+    attr_reader :q, :cnt
+
+    def initialize
+        @q, @cnt = [], -1
+    end
+
+    def <<(v) = @q.add_sorted(v)
+
+    def shift = (q.empty? ? (@cnt += 1) : @q.shift)
+
+    def first = (q.empty? ? cnt + 1 : q.first)
+end
+
+def smallest_chair(times, target_friend)
+    eq = QnCnt.new
+    times.collect.with_index {|(a, d), id| [a, d, id] }.sort_by(&:first).each_with_object([]) {|(a, d, id), oq|
+        eq << oq.shift.last until oq.empty? || oq.first.first > a
+        return eq.first if id == target_friend
+        oq.add_sorted([d, eq.shift])
+    }
+end
