@@ -5650,3 +5650,12 @@ def smallest_chair(times, target_friend)
         oq.add_sorted([d, eq.shift])
     }
 end
+
+# Divide Intervals into minimum number of groups
+def min_groups a
+    h, s = Hash.new(0), 0
+    a.each do
+        h[_1.first] += 1; h[_1.last + 1] -= 1
+    end
+    h.sort_by(&:first).map! { s += _1.last } .max
+end
