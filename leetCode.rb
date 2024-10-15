@@ -5659,3 +5659,18 @@ def min_groups a
     end
     h.sort_by(&:first).map! { s += _1.last } .max
 end
+
+
+# Seperate Black and White Balls
+def minimum_steps(s)
+    ops = 0
+    target = 0
+    
+    s.each_char.with_index do |char, pos|
+      if char == '0'
+        ops += pos - target
+        target += 1
+      end
+    end
+    ops
+  end
