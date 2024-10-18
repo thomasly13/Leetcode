@@ -1018,3 +1018,19 @@ class Solution:
                     ri -= 1
                 li += 1
         return swaps
+
+
+    # Find the K-th character in string game 1
+    def kthCharacter(self,k):
+    s = "a"
+        
+    while len(s) < k:
+        temp = ""
+        for c in s:
+            if c == 'z':
+                temp += 'a'
+            else:
+                temp += chr(ord(c) + 1)
+        s += temp
+        
+     return s[k - 1]
