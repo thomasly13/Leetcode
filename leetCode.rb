@@ -5689,3 +5689,16 @@ def kth_character(k)
   
     result_string[k-1]
   end
+
+
+  # Flip equivalent tree
+  def flip_equiv(root1, root2)
+    dfs = lambda do |node1, node2|
+      return true if node1.nil? && node2.nil?
+      return false if node1.nil? || node2.nil? || node1.val != node2.val
+  
+      (dfs.call(node1.left, node2.left) && dfs.call(node1.right, node2.right)) ||
+        (dfs.call(node1.left, node2.right) && dfs.call(node1.right, node2.left))
+    end
+    dfs.call(root1, root2)
+  end
