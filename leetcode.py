@@ -1048,3 +1048,27 @@ class Solution:
                     (checker(node1.right, node2.right) or checker(node1.right, node2.left)))
         
         return checker(root1, root2)
+
+
+    # Remove subfolders
+        def removeSubfolders(self, folder):
+        """
+        :type folder: List[str]
+        :rtype: List[str]
+        """
+
+        # n is num of path, L is total length of all folder pahts
+        # time complexity: O (n log n + L)
+        # space complexity: O(L)
+
+        folder.sort()
+        res = []
+
+        for path in folder:
+            # check if res is empty or if the current path is not subfolder
+            if not res or not path.startswith(res[-1] + '/'):
+                # if it's True, append to res
+                res.append(path)
+
+        return res
+        
