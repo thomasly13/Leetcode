@@ -5724,3 +5724,40 @@ def kth_character(k)
     end
     
     ans
+
+    # Count square matrices
+    def count_squares(matrix)
+        # Get dimensions of the matrix
+        n = matrix.size        # number of rows
+        m = matrix[0].size     # number of columns
+        
+        # Create a DP table with same dimensions as matrix
+        dp = Array.new(n) { Array.new(m, 0) }
+        
+        # Variable to store total count of squares
+        ans = 0
+        
+        # Initialize first column of DP table
+        n.times do |i|
+            dp[i][0] = matrix[i][0]
+            ans += dp[i][0]
+        end
+        
+        # Initialize first row of DP table
+        (1...m).each do |j|
+            dp[0][j] = matrix[0][j]
+            ans += dp[0][j]
+        end
+        
+        # Fill the DP table for remaining cells
+        (1...n).each do |i|
+            (1...m).each do |j|
+                if matrix[i][j] == 1
+                    dp[i][j] = 1 + [dp[i][j-1], dp[i-1][j], dp[i-1][j-1]].min
+                end
+                ans += dp[i][j]
+            end
+        end
+        
+        ans
+    end
