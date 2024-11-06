@@ -1146,3 +1146,23 @@ class Solution:
                     
         # If we made it through all checks, the sentence is circular
         return True
+
+    # Find if Array can be sorted
+        def setbit(self, num):
+        count = 0
+        while num:
+            count += num & 1
+            num >>= 1
+        return count
+
+    def canSortArray(self, nums):
+        n = len(nums)
+        
+        # Iterate and only swap adjacent elements with the same set bit count if needed
+        for i in range(n - 1):
+            for j in range(n - 1):
+                if nums[j] > nums[j + 1] and self.setbit(nums[j]) == self.setbit(nums[j + 1]):
+                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
+        
+        # Check if the array is sorted
+        return nums == sorted(nums)
