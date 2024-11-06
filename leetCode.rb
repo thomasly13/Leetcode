@@ -5812,3 +5812,8 @@ def kth_character(k)
         # If we made it through all checks, the sentence is circular
         true
       end
+
+# Find if Array can be sorted
+def can_sort_array(nums)
+    nums.chunk { _1.digits(2).sum }.flat_map { |_, chunk| chunk.sort } == nums.sort
+end
