@@ -5867,3 +5867,37 @@ def maximum_beauty(items, queries)
         max_beauties[left]
     end
 end
+
+# Shortest subarray
+def find_length_of_shortest_subarray(arr)
+    left = 0
+
+    # Find left bound
+    while left < arr.length - 1 && arr[left] <= arr[left + 1]
+        left += 1
+    end
+    
+    return 0 if left == arr.length - 1 # already sorted, so return
+    
+    right = arr.length - 1
+    
+    # Find right bound
+    while right > 0 && arr[right] >= arr[right - 1]
+        right -= 1
+    end
+
+    result = [arr.length - left - 1, right].min
+
+    i = 0
+    j = right
+    while i <= left && j < arr.length
+        if arr[j] >= arr[i]
+            result = [result, j - i - 1].min
+            i += 1
+        else
+            j += 1
+        end
+    end
+    
+    result
+end
