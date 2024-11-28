@@ -5932,3 +5932,36 @@ def take_characters(s, k)
     
     n - max_len
 end
+
+# Minimum Obstacle Removal to Reach Corner
+require 'rbconfig/sizeof'
+def minimum_obstacles(grid)
+    rows = grid.size
+    cols = grid[0].size
+    
+    dist = Array.new(rows){|i| Array.new(cols) {|i| RbConfig::LIMITS['INT32_MAX']}}
+    dist[0][0] = grid[0][0]
+        
+    pq = MinHeap.new {|x,y| y}
+    pq.push([[0,0], dist[0][0]])
+    
+    directions = [[0,1],[1,0],[0,-1],[-1,0]]
+    
+    while !pq.empty?
+        node_xy, node_dist = pq.pop
+        node_x, node_y = node_xy        
+        
+        return node_dist if node_x == rows-1 && node_y == cols-1
+        directions.each do |x,y|
+            new_x = node_x + x
+            new_y = node_y + y
+            
+            if new_x >= 0 && new_y >=0 && new_x < rows && new_y < cols &&  node_dist + grid[new_x][new_y] < dist[new_x][new_y]
+                
+                dist[new_x][new_y] = node_dist + grid[new_x][new_y]
+                pq << [[new_x, new_y], dist[new_x][new_y]]
+            end
+        end
+    end
+    dist[rows-1][cols-1]
+end
