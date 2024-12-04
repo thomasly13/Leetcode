@@ -1319,3 +1319,12 @@ def minimumObstacles(self, grid: List[List[int]]) -> int:
                 heappush(heap, [c_cost + grid[n_i][n_j], n_i, n_j])
     
     return -1
+
+
+# Make string a subsequence using cyclic increments
+def canMakeSubsequence(self, source: str, target: str) -> bool:
+    targetIdx, targetLen = 0, len(target)  
+    for currChar in source:
+        if targetIdx < targetLen and (ord(target[targetIdx]) - ord(currChar)) % 26 < 2:
+            targetIdx += 1  
+    return targetIdx == targetLen
